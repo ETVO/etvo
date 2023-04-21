@@ -1,0 +1,94 @@
+$bg_color: var(--bs-primary);
+$fg_color: white;
+
+header {
+    background: $bg_color;
+    padding: 0.5rem 0;
+    position: sticky;
+    z-index: 3;
+    transition: all 0.3s ease;
+
+    .navbar {
+        color: $fg_color;
+
+        .navbar-brand {
+            display: flex;
+            img {
+                height: 60px;
+            }
+            span {
+                font-size: 1rem;
+                line-height: 1;
+                color: white;
+            }
+        }
+
+        .navbar-toggler {
+            color: white;
+            border: none;
+            font-size: 2rem;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .navbar-nav {
+            text-align: end;
+            .nav-item .nav-link {
+                color: $fg_color;
+                font-weight: 300;
+                font-family: "Lora", serif;
+            }
+        }
+
+        .action {
+            margin-left: 1rem;
+
+            .btn {
+            }
+        }
+    }
+
+    &.fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        animation: smoothScroll 0.75s forwards;
+        box-shadow: 5px 0 10px 0 rgba(#000, 0.25);
+
+        .navbar {
+            color: $fg_color;
+
+            .navbar-brand {
+                img {
+                    height: 40px;
+                }
+            }
+        }
+    }
+}
+
+@keyframes smoothScroll {
+    0% {
+        transform: translateY(-100px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        .navbar .navbar-nav .nav-item .nav-link {
+            font-size: 1.25rem;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        .navbar .navbar-nav .nav-item .nav-link {
+            font-size: 1.25rem;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+.hero {
+    position: relative;
+    padding: 2rem 0 3rem;
+    background-color: var(--bs-primary);
+
+    color: white;
+
+    .content {
+        position: relative;
+
+        .title {
+            position: relative;
+            font-size: calc(1.75rem + .75vw);
+            color: white;
+            margin-bottom: 1rem;
+            z-index: 1;
+        }
+        .desc {
+            margin-bottom: 0;
+        }
+    }
+
+    &::after {
+        content: url("/assets/img/web.svg");
+        position: absolute;
+        z-index: 1;
+        width: 150px;
+        height: auto;
+        object-fit: cover;
+        bottom: -90px;
+        right: -50px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        &::after {
+            width: 100px;
+            bottom: -75px;
+            right: -33px;
+        }
+    }
+}
