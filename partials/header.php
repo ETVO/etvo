@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/139517787.js"></script>
+    <!-- End of HubSpot Embed Code -->
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,12 +45,9 @@
                             <a class="nav-link" href="#contact">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#about">About</a>
+                            <a class="nav-link" href="#portfolio">Portfolio</a>
                         </li>
                     </ul>
-                    <!-- <div class="action">
-                        <a href="" class="btn btn-dark">Contact</a>
-                    </div> -->
                 </div>
             </div>
         </nav>

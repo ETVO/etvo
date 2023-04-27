@@ -19,7 +19,12 @@ include './partials/header.php';
 <?php
 include './partials/services.php';
 
+
+include './partials/contact.php';
+
 include './partials/money.php';
+
+include './partials/portfolio.php';
 
 include './partials/footer.php';
 

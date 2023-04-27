@@ -3,14 +3,20 @@
 @import './blocks/hero.scss';
 @import './blocks/services.scss';
 @import './blocks/money.scss';
+@import './blocks/contact.scss';
+@import './blocks/portfolio.scss';
 
 html {
     scroll-behavior: smooth;
+    width: 100vw !important;
     overflow-x: hidden !important;
 }
 
 body {
+    width: 100vw !important;
     overflow-x: hidden !important;
+    overflow-y: visible;
+    background-color: white;
 }
 
 a {

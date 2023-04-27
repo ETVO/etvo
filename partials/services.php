@@ -32,7 +32,7 @@ $services = array(
     <div class="container">
         <div class="content">
             <p class="pre-title">SERVICES</p>
-            <h2 class="title">Offering high quality services for projects that want to be seen and remembered.</h2>
+            <h2 class="title">Offering high quality services for projects that want to grow.</h2>
         </div>
         <div class="main-action">
             <a href="" class="btn btn-primary">start your project</a>

@@ -1,0 +1,39 @@
+.portfolio {
+    position: relative;
+    z-index: 0;
+    padding: 3rem 0;
+    background-color: var(--bs-dark);
+
+    color: white;
+
+    overflow: hidden;
+
+    .content {
+        position: relative;
+        margin-bottom: 1.5rem;
+        
+        .pre-title {
+            letter-spacing: 0.3rem;
+            font-weight: 300;
+            font-size: .9rem;
+        }
+
+        .title {
+            color: white;
+        }
+    }
+    .main-action {
+        .caption {
+            margin-bottom: 1rem;
+
+            color: var(--bs-light);
+            font-style: italic;
+            font-family: "Lora", sans-serif;
+            font-weight: 400;
+        }
+
+        &.final {
+            margin-top: 2rem;
+        }
+    }
+}
