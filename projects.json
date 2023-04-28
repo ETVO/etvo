@@ -2,8 +2,11 @@
     {
         "name": "Competencias del Voleibol",
         "slug": "voleibol-competencias",
-        "description": "Website developed to collect data for a Doctorate project of the University of Barcelona. The website included an admin area, to view the collected data, generate graphs, and export records in different formats.",
-        "year": 2018,
-        "tech": "PHP, JS"
+        "year": 2018
+    },
+    {
+        "name": "Empresarial Santo Antônio",
+        "slug": "empresarial-santo-antonio",
+        "year": 2020
     }
 ]

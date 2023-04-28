@@ -1,0 +1,20 @@
+{
+    "title": "Competencias del Voleibol",
+    "link": "https://voleibol-competencias.com/",
+    "description": "Website developed to collect data for a Doctorate project of the University of Barcelona. The website included an admin area, to view the collected data, generate graphs, and export records in different formats.",
+    "tech": "PHP, JS",
+    "images": [
+        {
+            "filename": "1.webp"
+        },
+        {
+            "filename": "2.webp"
+        },
+        {
+            "filename": "3.webp"
+        },
+        {
+            "filename": "4.webp"
+        }
+    ]
+}
