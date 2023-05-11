@@ -157,6 +157,7 @@ $accent_color: #e52a49;
                 .more-toggle {
                     background: none;
                     border: none;
+                    border-radius: .5rem;
 
                     padding: 0.35rem 1rem;
 
@@ -175,6 +176,10 @@ $accent_color: #e52a49;
 
                     &:hover {
                         background-color: mix(black, #1e1e1e, 20%);
+                    }
+
+                    &:focus-visible {
+                        box-shadow: 0 0 0 0.25rem inset rgba($accent_color, 0.5);
                     }
 
                     &:not(.collapsed) {

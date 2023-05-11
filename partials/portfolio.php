@@ -1,6 +1,6 @@
 <?php
 
-$projects_json = file_get_contents(__DIR__ . '/../projects.json');
+$projects_json = file_get_contents(__DIR__ . '/../data/projects.json');
 $projects = json_decode($projects_json);
 
 // Sort newer to older

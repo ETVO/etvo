@@ -1,0 +1,15 @@
+{
+    "name": "Hero",
+    "icon": "easel",
+    "default_anchor": "hero",
+    "attributes": {
+        "title": {
+            "label": "Title",
+            "type": "string"
+        },
+        "desc": {
+            "label": "Description",
+            "type": "rich"
+        }
+    }
+}
