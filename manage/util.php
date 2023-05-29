@@ -1,9 +1,12 @@
 <?php
 
+define('DATA_PATH', './data/');
+define('MODEL_PATH', './model/');
+
 $settings = null;
 
 // Read settings
-$settings_json = file_get_contents('../data/settings.json');
+$settings_json = file_get_contents(DATA_PATH . '/settings.json');
 $settings = json_decode($settings_json, true);
 
 function get_available_blocks()
@@ -11,7 +14,7 @@ function get_available_blocks()
     $blocks = [];
 
     // Get all files inside blocks folder and loop
-    $blocks_files = glob('../blocks/*.{json}', GLOB_BRACE);
+    $blocks_files = glob(MODEL_PATH . '/blocks/*.{json}', GLOB_BRACE);
     foreach ($blocks_files as $block_file) {
         // Get contents
         $block_json = file_get_contents($block_file);
@@ -37,30 +40,58 @@ function get_available_blocks()
 
 function get_model($name)
 {
-    $model_json = file_get_contents("./model/$name.json");
+    $model_json = file_get_contents(MODEL_PATH . "/$name.json");
     return json_decode($model_json, true);
 }
 
 function get_data($name)
 {
-    $model_json = file_get_contents("../data/$name.json");
+    $model_json = file_get_contents(DATA_PATH . "/$name.json");
     return json_decode($model_json, true);
 }
 
-function render_field($name, $type, $value, $echo = true)
+function render_field($name, $field, $value, $parent_block = null, $echo = true)
 {
-    ob_start(); // Start HTML buffering
-    switch ($type):
-        case 'string':
-?>
-            <input type="text" class="form-control" name="<?php echo $name; ?>" value="<?php echo $value; ?>">
-<?php
-            break;
-        case 'blocks':
-            render_blocks_field($name, $value);
-            break;
+    $type = $field['type'];
+    $label = $field['label'];
 
-    endswitch;
+    ob_start(); // Start HTML buffering
+?>
+    <div class="field" id="<?php echo $name ?>">
+        <label for="<?php echo $name; ?>">
+            <?php echo $label ?>
+        </label>
+        <?php
+
+        switch ($type):
+            case 'string':
+        ?>
+                <input type="text" class="form-control" name="<?php echo $name; ?>" value="<?php echo $value; ?>">
+            <?php
+                break;
+
+            case 'rich':
+            ?>
+                <div class="rich-editor form-control"><?php echo $value; ?></div>
+            <?php
+                break;
+
+            case 'textarea':
+            ?>
+                <textarea name="<?php echo $name; ?>" class="form-control" rows="2"><?php echo $value; ?></textarea>
+        <?php
+                break;
+
+            case 'blocks':
+                // If it has no parent block, start expanded, otherwise start collapsed
+                render_blocks_field($value, $parent_block);
+                break;
+
+        endswitch;
+
+        ?>
+    </div>
+    <?php
 
     $output = ob_get_contents(); // collect buffered contents
 
@@ -73,21 +104,54 @@ function render_field($name, $type, $value, $echo = true)
         return $output;
 }
 
-function render_blocks_field($field_name, $blocks) {
-    foreach($blocks as $block) :
+function render_blocks_field($blocks, $parent_block)
+{
+    $expanded = $parent_block == null;
+    $header_tag = ($expanded) ? 'h3' : 'h4';
+
+    foreach ($blocks as $block) :
 
         $block_id = $block['id'];
 
         $block_model = get_block_model($block_id);
-        
-        echo $block_model['name'];
+
+        $accordion_id = $block_id . random_int(0, 99);
+
+        $accordion_title = (isset($block_model['field_as_title']))
+            ? ($block['data'][$block_model['field_as_title']] ?? $block_model['name'])
+            : $block_model['name'];
+
+    ?>
+        <div class="block-field accordion-item">
+            <<?php echo $header_tag; ?> class="block-title accordion-header" id="heading_<?php echo $accordion_id; ?>">
+                <button type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<?php echo $accordion_id; ?>" aria-expanded="true" aria-controls="collapse_<?php echo $accordion_id; ?>">
+                    <span class="bi-<?php echo $block_model['icon']; ?>"></span>
+                    <?php echo $accordion_title; ?>
+                </button>
+            </<?php echo $header_tag; ?>>
+
+
+            <div id="collapse_<?php echo $accordion_id; ?>" class="accordion-collapse collapse <?php if($expanded) echo 'show'; ?>" aria-labelledby="heading_<?php echo $accordion_id; ?>">
+
+                <div class="accordion-body">
+                    <?php foreach ($block_model['attributes'] as $key => $field) :
+
+                        $value = $block['data'][$key] ?? null;
+                        render_field($key, $field, $value, $block_id);
+
+                    endforeach; ?>
+                </div>
+            </div>
+        </div>
+<?php
 
     endforeach;
 }
 
-function get_block_model($id) {
+function get_block_model($id)
+{
     // Get contents
-    $block_json = file_get_contents("./model/blocks/$id.json");
+    $block_json = file_get_contents(MODEL_PATH . "/blocks/$id.json");
 
     if (!$block_json) return null;
 

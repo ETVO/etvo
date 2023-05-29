@@ -9,7 +9,7 @@
         },
         "desc": {
             "label": "Description",
-            "type": "rich"
+            "type": "textarea"
         }
     }
 }

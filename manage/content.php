@@ -37,19 +37,17 @@ $data = get_data('content');
     <?php endif; ?>
 
     <div class="model-view">
-        <?php foreach ($model as $key => $field) : ?>
-            <div class="field" id="<?php echo $key ?>">
-                <label for="<?php echo $key; ?>">
-                    <?php echo $field['label'] ?>
-                </label>
-                <?php render_field($key, $field['type'], $data[$key]); ?>
-            </div>
-        <?php endforeach; ?>
+        <?php foreach ($model as $key => $field) :
+
+            $value = $data[$key] ?? null;
+            render_field($key, $field, $value);
+            
+        endforeach; ?>
     </div>
 </main>
 
 
-<?
+<?php
 
 include './partials/footer.php';
 

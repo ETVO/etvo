@@ -1,6 +1,6 @@
 <?php
 
-$projects_json = file_get_contents(__DIR__ . '/../data/projects.json');
+$projects_json = file_get_contents(__DIR__ . '/../manage/data/projects.json');
 $projects = json_decode($projects_json);
 
 // Sort newer to older
@@ -19,7 +19,7 @@ usort($projects, function ($a, $b) {
             <p class="pre-title">PORTFOLIO</p>
             <h2 class="title">Take a look at what has been done.</h2>
             <p class="desc">
-                Efficient websites and experiences, a tailor-made, custom-built, professional house for a company, in the web.
+                Professional, tailor-made, custom-built house for a company, in the web.
             </p>
         </div>
         <div class="projects">

@@ -3,13 +3,18 @@
     "icon": "boxes",
     "default_anchor": "services",
     "attributes": {
+        "subtitle": {
+            "label": "Subtitle",
+            "type": "string"
+        },
         "title": {
             "label": "Title",
             "type": "string"
         },
-        "desc": {
-            "label": "Description",
-            "type": "rich"
+        "services": {
+            "label": "Services",
+            "type": "blocks",
+            "allowed_blocks": ["service"]
         }
     }
 }

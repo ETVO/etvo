@@ -10,7 +10,7 @@ include './partials/header.php';
     <div class="container">
         <div class="content">
             <h1 class="title">Specialized in web design & development.</h1>
-            <p class="desc">Crafting tools and experiences.</p>
+            <p class="desc">Crafting efficient tools and memorable experiences.</p>
         </div>
     </div>
 </section>
