@@ -36,13 +36,21 @@ $data = get_data('content');
         </div>
     <?php endif; ?>
 
-    <div class="model-view">
-        <?php foreach ($model as $key => $field) :
+    <div class="model row w-100 m-0">
+        <div class="model-view col-9">
+            <?php foreach ($model as $key => $field) :
 
-            $value = $data[$key] ?? null;
-            render_field($key, $field, $value);
-            
-        endforeach; ?>
+                $value = $data[$key] ?? null;
+                render_field($key, $field, $value);
+
+            endforeach; ?>
+        </div>
+        <div class="col-3">
+            <div class="model-sidebar">
+                <button class="btn btn-primary">Save</button>
+                <small>Changes are <b><i>NOT</i></b> saved automatically</small>
+            </div>
+        </div>
     </div>
 </main>
 

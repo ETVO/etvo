@@ -106,7 +106,7 @@ function render_field($name, $field, $value, $parent_block = null, $echo = true)
 
 function render_blocks_field($blocks, $parent_block)
 {
-    $expanded = $parent_block == null;
+    $expanded = false; # $parent_block == null;
     $header_tag = ($expanded) ? 'h3' : 'h4';
 
     foreach ($blocks as $block) :
@@ -117,9 +117,11 @@ function render_blocks_field($blocks, $parent_block)
 
         $accordion_id = $block_id . random_int(0, 99);
 
-        $accordion_title = (isset($block_model['field_as_title']))
-            ? ($block['data'][$block_model['field_as_title']] ?? $block_model['name'])
-            : $block_model['name'];
+        // $accordion_title = (isset($block_model['field_as_title']))
+        //     ? ($block['data'][$block_model['field_as_title']] ?? $block_model['name'])
+        //     : $block_model['name'];
+
+        $accordion_title = $block_model['name'];
 
     ?>
         <div class="block-field accordion-item">
