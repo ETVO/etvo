@@ -36,7 +36,7 @@ $data = get_data('content');
         </div>
     <?php endif; ?>
 
-    <div class="model row w-100 m-0">
+    <form action="save.php" method="POST" class="model row w-100 m-0">
         <div class="model-view col-9">
             <?php foreach ($model as $key => $field) :
 
@@ -51,7 +51,7 @@ $data = get_data('content');
                 <small>Changes are <b><i>NOT</i></b> saved automatically</small>
             </div>
         </div>
-    </div>
+    </form>
 </main>
 
 

@@ -19,7 +19,7 @@ $menu_options = array(
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage <?php echo $site_title; ?></title>
+    <title>manage <?php echo $site_title; ?></title>
 
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
@@ -38,7 +38,10 @@ $menu_options = array(
     <header>
         <nav class="navbar navbar-expand-md">
             <div class="container">
-                <a class="navbar-brand" href="index.php">Manage <?php echo $site_title; ?></a>
+                <a class="navbar-brand" href="index.php">
+                    <span class="etvo">etvo<i>-</i>manage</span> 
+                    <span class="site-title"><?php echo $site_title; ?></span> 
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#manageNavbar" aria-controls="manageNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="bi-list"></span>
                 </button>

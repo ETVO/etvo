@@ -50,10 +50,14 @@ function get_data($name)
     return json_decode($model_json, true);
 }
 
-function render_field($name, $field, $value, $parent_block = null, $echo = true)
+function render_field($field_name, $field, $value, $parent_block = null, $echo = true)
 {
     $type = $field['type'];
     $label = $field['label'];
+
+    $name = ($parent_block)
+        ? $parent_block . '[' . $field_name .']'
+        : $field_name;
 
     ob_start(); // Start HTML buffering
 ?>
@@ -83,8 +87,7 @@ function render_field($name, $field, $value, $parent_block = null, $echo = true)
                 break;
 
             case 'blocks':
-                // If it has no parent block, start expanded, otherwise start collapsed
-                render_blocks_field($value, $parent_block);
+                render_blocks_field($value, $name);
                 break;
 
         endswitch;
@@ -104,9 +107,9 @@ function render_field($name, $field, $value, $parent_block = null, $echo = true)
         return $output;
 }
 
-function render_blocks_field($blocks, $parent_block)
+function render_blocks_field($blocks, $block_group_name = null)
 {
-    $expanded = false; # $parent_block == null;
+    $expanded = false;
     $header_tag = ($expanded) ? 'h3' : 'h4';
 
     foreach ($blocks as $block) :
@@ -117,14 +120,14 @@ function render_blocks_field($blocks, $parent_block)
 
         $accordion_id = $block_id . random_int(0, 99);
 
-        // $accordion_title = (isset($block_model['field_as_title']))
-        //     ? ($block['data'][$block_model['field_as_title']] ?? $block_model['name'])
-        //     : $block_model['name'];
-
         $accordion_title = $block_model['name'];
+    
+        $block_field_name = ($block_group_name)
+            ? $block_group_name . '[' . $block_id .']'
+            : $block_id;
 
     ?>
-        <div class="block-field accordion-item">
+        <fieldset class="block-field accordion-item" name="<?php echo $block_field_name; ?>">
             <<?php echo $header_tag; ?> class="block-title accordion-header" id="heading_<?php echo $accordion_id; ?>">
                 <button type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<?php echo $accordion_id; ?>" aria-expanded="true" aria-controls="collapse_<?php echo $accordion_id; ?>">
                     <span class="bi-<?php echo $block_model['icon']; ?>"></span>
@@ -139,12 +142,12 @@ function render_blocks_field($blocks, $parent_block)
                     <?php foreach ($block_model['attributes'] as $key => $field) :
 
                         $value = $block['data'][$key] ?? null;
-                        render_field($key, $field, $value, $block_id);
+                        render_field($key, $field, $value, $block_field_name);
 
                     endforeach; ?>
                 </div>
             </div>
-        </div>
+        </fieldset>
 <?php
 
     endforeach;
