@@ -4,6 +4,10 @@ $page_title = 'ETVO';
 
 include './partials/header.php';
 
+
+$content_json = file_get_contents('./manage/data/test.json');
+$content = json_decode($content_json, true, 512, JSON_FORCE_OBJECT);
+
 ?>
 
 <section class="hero">

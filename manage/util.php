@@ -101,7 +101,7 @@ function render_field($field_name, $field, $value, $parent_block = null, $echo =
 
         ?>
     </div>
-    <?php
+<?php
 
     $output = ob_get_contents(); // collect buffered contents
 
@@ -124,9 +124,9 @@ function render_block($blocks, $field_attributes, $block_group_name = null)
     }
 
     $allow = array(
-        'add' =>false,
-        'remove' =>false,
-        'reorder' =>false,
+        'add' => false,
+        'remove' => false,
+        'reorder' => false,
     );
     if (isset($field_attributes['allow'])) {
         $allow['add'] = $field_attributes['allow']['add'] ?? false;
@@ -134,45 +134,45 @@ function render_block($blocks, $field_attributes, $block_group_name = null)
         $allow['reorder'] = $field_attributes['allow']['reorder'] ?? false;
     }
 
-    ?>
+?>
     <input type="hidden" class="render-helper" name="allow" value="<?php echo htmlspecialchars(json_encode($allow)); ?>">
     <input type="hidden" class="render-helper" name="header_tag" value="<?php echo ($header_tag); ?>">
 
     <div class="blocks">
-    <?php
-    foreach ($blocks as $i => $block) :
+        <?php
+        foreach ($blocks as $id => $block) :
 
-        render_block_field($i, $block, $block_group_name, $allow, $expanded, $header_tag);
+            render_block_field($id, $block, $block_group_name, $allow, $expanded, $header_tag);
 
-    endforeach;
-    ?>
+        endforeach;
+        ?>
     </div>
     <?php
 
     // Show add button to add new blocks
     if ($allow['add']) {
     ?>
-    <div class="d-flex align-items-center add-new">
-        <button class="btn-add-block btn icon-btn" type="button" title="Add new block">
-            <span class="icon bi-plus-lg"></span>
-            <span class="text">Add new</span>
-        </button>
-        <small class="ms-2" style="display: none;">No block was selected.</small>
-    </div>
+        <div class="d-flex align-items-center add-new">
+            <button class="btn-add-block btn icon-btn" type="button" title="Add new block">
+                <span class="icon bi-plus-lg"></span>
+                <span class="text">Add new</span>
+            </button>
+            <small class="ms-2" style="display: none;">No block was selected.</small>
+        </div>
     <?php
     }
 }
 
-function render_block_field($index, $block, $block_group_name, $allow = [], $expanded = false, $header_tag = 'h3')
+function render_block_field($block_id, $block, $block_group_name, $allow = [], $expanded = false, $header_tag = 'h3')
 {
 
-    $block_id = isset($block['id'])
-        ? $block['id']
-        : $block;
+    $block_id = explode(':', $block_id);
+    $index = $block_id[1];
+    $block_id = $block_id[0];
 
     $block_model = get_block_model($block_id);
 
-    if(isset($block_model['expanded']))
+    if (isset($block_model['expanded']))
         $expanded = $block_model['expanded'];
 
     $accordion_id = $block_id . random_int(0, 99);
@@ -180,7 +180,7 @@ function render_block_field($index, $block, $block_group_name, $allow = [], $exp
     $accordion_title = $block_model['title'];
 
     $block_field_name = ($block_group_name)
-        ? $block_group_name . '[' . $index . ']' . '[' . $block_id . ']'
+        ? $block_group_name . '[' . $block_id . ':' . $index . ']'
         : $block_id;
 
     ?>
@@ -215,9 +215,8 @@ function render_block_field($index, $block, $block_group_name, $allow = [], $exp
                 </div>
                 <?php foreach ($block_model['attributes'] as $key => $field) :
 
-                    $value = isset($block['data'])
-                        ? $block['data'][$key] ?? null
-                        : null;
+                    $value = $block[$key] ?? null;
+                    
                     render_field($key, $field, $value, $block_field_name);
 
                 endforeach; ?>

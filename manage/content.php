@@ -7,7 +7,7 @@ include './partials/header.php';
 $edit_blocks = $settings['allow_editing_blocks'];
 
 $model = get_model('content');
-$data = get_data('content');
+$data = get_data('test');
 
 ?>
 
@@ -41,6 +41,9 @@ $data = get_data('content');
             <?php foreach ($model as $key => $field) :
 
                 $value = $data[$key] ?? null;
+
+                
+                $key = explode(':', $key)[0];
                 render_field($key, $field, $value);
             
             endforeach; ?>

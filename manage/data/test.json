@@ -1,51 +1,27 @@
 {
     "page_title": "ETVO",
-    "blocks": [
-        {
-            "hero": {
-                "title": "Specialized in web design & development.",
-                "desc": "Crafting tools and experiences."
-            }
+    "blocks": {
+        "hero:0": {
+            "title": "Specialized in web design & development.",
+            "desc": "Crafting tools and experiences."
         },
-        {
+        "services:1": {
+            "subtitle": "Specialized in web design & development.",
+            "title": "Offering high quality services for projects that want to grow.",
             "services": {
-                "subtitle": "SERVICES",
-                "title": "Offering high quality services for projects that want to grow.",
-                "services": [
-                    {
-                        "service": {
-                            "title": "Website Development",
-                            "icon": "house-door",
-                            "description": "Developing a website front-end and back-end, creating web pages, blogs, catalogs, and any type of web resource, with a strong care for performance and user experience.",
-                            "is_for_me": "Good tool for a company that values their marketing, having a professional display of their services and products online, with strong digital marketing resources such as a blog and contact forms."
-                        }
-                    },
-                    {
-                        "service": {
-                            "title": "Web Design",
-                            "icon": "brush",
-                            "description": "Creating a prototype for a website, in its desktop and mobile versions, and designing the User Experience of the website.",
-                            "is_for_me": "Useful resource for companies that are looking to use their website to sell, convert and grow authority.\r\nRemarkable websites make remarkable companies."
-                        }
-                    },
-                    {
-                        "service": {
-                            "title": "Website Maintenance Plans",
-                            "icon": "cloud-check",
-                            "description": "Taking care of keeping the website always updated and in good shape.",
-                            "is_for_me": "Important for companies that are looking to create a strong digital presence and expand their business."
-                        }
-                    },
-                    {
-                        "service": {
-                            "title": "Branding & Visual Id",
-                            "icon": "gem",
-                            "description": "Offering a specialized input for existing brands and developing new brands and visual identities from scratch.",
-                            "is_for_me": "A good asset for projects looking for a strong brand concept and professional visual resources to start up their marketing efforts."
-                        }
-                    }
-                ]
+                "service:0": {
+                    "title": "Specialized in web design & development.",
+                    "icon": "",
+                    "description": "Crafting tools and experiences.",
+                    "is_for_me": "Crafting tools and experiences."
+                },
+                "service:1": {
+                    "title": "Specialized in web design & development.",
+                    "icon": "",
+                    "description": "Crafting tools and experiences.",
+                    "is_for_me": "Crafting tools and experiences."
+                }
             }
         }
-    ]
+    }
 }
