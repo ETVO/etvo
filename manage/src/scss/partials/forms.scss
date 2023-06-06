@@ -1,0 +1,134 @@
+.model {
+    overflow: visible;
+    height: 100%;
+
+    .model-view {
+        .field {
+            margin-top: 1rem;
+            label {
+                @include small-text;
+                font-weight: 500;
+                margin-bottom: 0.25rem;
+            }
+
+            .rich-editor {
+                .ql-editor {
+                    font-family: "Roboto";
+                    padding: 0 !important;
+                }
+            }
+        }
+
+        .block-field {
+            border-left: solid 2px rgba(#000, 0.1);
+            padding: 0.75rem 1.25rem 0.75rem;
+
+            transition: all 0.2s;
+
+            .field:first-child {
+                margin-top: 0;
+            }
+
+            .add-new {
+                margin-top: .5rem;
+                margin-left: -.6rem;
+                small{
+                    margin: auto;
+                    line-height: 1;
+                    font-size: .85rem;
+                    color: rgba(#000, .5);
+                    font-style: italic;
+                    font-family: 'Lora', serif;
+                }
+            }
+
+            &.accordion-item {
+                &:has(> .accordion-collapse.collapsing),
+                &:has(> .accordion-collapse.show) {
+                    border-left-color: rgba(#ed2647, 0.6);
+
+                    > .accordion-header {
+                        margin-left: 0;
+                        button {
+                            span {
+                                color: #ed2647 !important;
+                            }
+                        }
+                    }
+                }
+                > .accordion-header {
+                    display: flex;
+
+                    margin-left: -2rem;
+
+                    background-color: white;
+
+                    transition: all 0.2s;
+
+                    button.btn-header {
+                        padding: 0.25rem 0 0.125rem;
+                        display: flex;
+                        width: 100%;
+                        border: none;
+                        background: none;
+                        span {
+                            margin-right: 0.5rem;
+                            transition: color 0.1s;
+                            color: rgba(#000, 0.6);
+                        }
+
+                        &:hover {
+                            opacity: 0.7;
+                        }
+                    }
+                }
+
+                > .accordion-collapse > .accordion-body {
+                    padding: 0.5rem 0;
+
+                    .options {
+                        display: flex;
+
+                        button {
+                            margin-right: .75rem;
+                            font-size: .7rem;
+                            &:last-child {
+                                margin-right: 0;
+                            }
+                        }
+                    }
+
+                    > .field > .blocks {
+                        margin-left: 0.25rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .model-sidebar {
+        position: sticky;
+        top: 0.5rem;
+        right: 0;
+
+        margin-top: 1rem;
+        padding: 1rem 1.25rem;
+
+        border: solid 1px #eee;
+        border-radius: 0.375rem;
+
+        box-shadow: 2px 2px 2px 0 rgba(#000, 0.1);
+
+        display: flex;
+        flex-flow: column;
+        text-align: center;
+
+        small {
+            display: inline-block;
+            font-size: 0.7rem;
+            margin-top: 0.75rem;
+            color: #888;
+            line-height: 1.1;
+        }
+    }
+}

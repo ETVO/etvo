@@ -1,7 +1,4 @@
-/.env
 /.vscode
-/vendor
-/composer.lock
 /node_modules
 /package-lock.json
 /assets/css

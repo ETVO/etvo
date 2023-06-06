@@ -1,0 +1,24 @@
+{
+    "title": "Service",
+    "icon": "box",
+    "default_anchor": "service",
+    "field_as_title": "title",
+    "attributes": {
+        "title": {
+            "label": "Title",
+            "type": "string"
+        },
+        "icon": {
+            "label": "Icon",
+            "type": "string"
+        },
+        "description": {
+            "label": "Description",
+            "type": "textarea"
+        },
+        "is_for_me": {
+            "label": "Is this for me?",
+            "type": "textarea"
+        }
+    }
+}

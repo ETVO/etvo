@@ -1,0 +1,86 @@
+@mixin small-text() {
+    letter-spacing: 0.4px;
+    font-size: 0.95rem;
+}
+
+@import "./partials/header.scss";
+@import "./partials/main-container.scss";
+@import "./partials/content.scss";
+@import "./partials/forms.scss";
+
+html {
+    scroll-behavior: smooth;
+    overflow: visible;
+}
+
+body {
+    background-color: white !important;
+    overflow: visible;
+}
+
+.container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+}
+
+*::selection {
+    background-color: mix(white, #ed2647, 20%);
+    color: white;
+}
+
+mark {
+    background-color: var(--bs-primary) !important;
+    padding: 0.1rem 0 !important;
+}
+
+form {
+    label {
+        cursor: pointer;
+    }
+}
+
+.btn {
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    color: white !important;
+}
+
+.btn.icon-btn {
+    display: flex;
+    align-items: center;
+
+    border: solid 1px #1e1e1e;
+    padding: 0.25rem 0.5rem;
+
+    font-size: .8rem;
+
+    span.icon {
+        color: var(--bs-primary);
+        margin-right: 0.25rem;
+    }
+
+    span.text {
+        color: var(--bs-dark);
+        font-weight: 300;
+    }
+
+    &:not(:has(> span.text)) {
+        span.icon {
+            margin-right: 0;
+        }
+    }
+
+    &:active {
+        opacity: 0.5;
+    }
+}
+
+.btn.btn-remove-block {
+    border-color: var(--bs-primary);
+
+    span.text {
+        color: var(--bs-primary);
+    }
+}

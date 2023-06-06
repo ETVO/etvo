@@ -42,7 +42,7 @@ $data = get_data('content');
 
                 $value = $data[$key] ?? null;
                 render_field($key, $field, $value);
-
+            
             endforeach; ?>
         </div>
         <div class="col-3">

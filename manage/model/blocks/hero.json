@@ -1,5 +1,5 @@
 {
-    "name": "Hero",
+    "title": "Hero",
     "icon": "easel",
     "default_anchor": "hero",
     "attributes": {

@@ -1,0 +1,50 @@
+header {
+    nav {
+        background-color: var(--bs-primary);
+        .navbar-brand {
+            font-weight: bold;
+            font-family: "Lora", serif;
+            color: white !important;
+            font-size: 1.5rem;
+
+            span.etvo {
+                font-weight: 600;
+                i {
+                    // font-size: 0.75em;
+                }
+            }
+
+            span.site-title {
+                font-style: italic;
+                font-size: .7em;
+                font-weight: 300;
+                margin-left: .25rem;
+            }
+
+            &:hover,
+            &:active,
+            &:focus {
+                opacity: 0.7;
+            }
+        }
+
+        .navbar-nav {
+            font-weight: 400;
+            font-family: "Lora", serif;
+
+            .nav-item a {
+                color: white !important;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    opacity: 0.7;
+                }
+
+                &.active {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

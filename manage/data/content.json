@@ -1,0 +1,62 @@
+{
+    "page_title": "ETVO",
+    "blocks": [
+        {
+            "id": "hero",
+            "data": {
+                "title": "Specialized in web design & development.",
+                "desc": "Crafting tools and experiences."
+            }
+        },
+        {
+            "id": "services",
+            "data": {
+                "subtitle": "Specialized in web design & development.",
+                "title": "Offering high quality services for projects that want to grow.",
+                "services": [
+                    {
+                        "id": "service",
+                        "data": {
+                            "title": "Specialized in web design & development.",
+                            "description": "Crafting tools and experiences.",
+                            "is_for_me": "Crafting tools and experiences."
+                        }
+                    },
+                    {
+                        "id": "service",
+                        "data": {
+                            "title": "Specialized in web design & development.",
+                            "description": "Crafting tools and experiences.",
+                            "is_for_me": "Crafting tools and experiences."
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": "services",
+            "data": {
+                "subtitle": "Specialized in web design & development.",
+                "title": "Offering high quality services for projects that want to grow.",
+                "services": [
+                    {
+                        "id": "service",
+                        "data": {
+                            "title": "Specialized in web design & development.",
+                            "description": "Crafting tools and experiences.",
+                            "is_for_me": "Crafting tools and experiences."
+                        }
+                    },
+                    {
+                        "id": "service",
+                        "data": {
+                            "title": "Specialized in web design & development.",
+                            "description": "Crafting tools and experiences.",
+                            "is_for_me": "Crafting tools and experiences."
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

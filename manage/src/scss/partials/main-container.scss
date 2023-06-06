@@ -1,0 +1,22 @@
+
+main {
+    padding: 2rem 0;
+    overflow: visible;
+
+    .heading {
+        margin-bottom: 1rem;
+        
+        .desc {
+            @include small-text();
+            font-weight: 300;
+            margin-bottom: 0;
+            line-height: 1.3;
+        }
+    }
+    
+    .section-title {
+        @include small-text();
+        font-weight: bold;
+        margin-bottom: .75rem;
+    }
+}
