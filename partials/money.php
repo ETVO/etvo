@@ -1,17 +1,19 @@
+<?php
+
+$money = $blocks['money'];
+?>
 <section class="money">
     <a class="anchor" id="money"></a>
     <div class="container">
 
         <div class="content">
-            <p class="pre-title">MONEY TALKS</p>
+            <p class="pre-title"><?php echo $money['subtitle'] ?></p>
             <h2 class="title">
-                <span>Fair pricing,</span><br>
-                <span>fair job.</span>
+                <?php echo $money['title'] ?>
             </h2>
             <div class="desc">
                 <p>
-                    <b class="high">Only you can know how much you are willing and able to invest in a website, rebranding or design project.</b> 
-                    <br>Let’s find a solution that fits your range, with the guarantee of a well-done job. In any craft, ultimately it is not the payment that matters most, but the work itself.
+                    <?php echo $money['desc'] ?>
                 </p>
             </div>
         </div>

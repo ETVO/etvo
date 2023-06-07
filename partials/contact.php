@@ -1,15 +1,19 @@
+<?php
+
+$contact = $blocks['contact'];
+?>
 <section class="contact">
     <a class="anchor" id="contact"></a>
     <div class="container">
 
         <div class="content">
             <div class="inner">
-                <span class="pre-title">START YOUR PROJECT</span>
+                <span class="pre-title"><?php echo $contact['subtitle'] ?></span>
                 <h2 class="title">
-                    Make it happen.
+                    <?php echo $contact['title']; ?>
                 </h2>
-                <p class="desc">Put your idea in the real world with expertise and elegance. 
-                    <span class="high">Make it fast, make it yours, make it happen.</span>
+                <p class="desc">
+                    <?php echo $contact['desc']; ?>
                 </p>
                 <div class="form">
                     <form action="">

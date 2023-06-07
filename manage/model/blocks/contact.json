@@ -1,0 +1,19 @@
+{
+    "title": "Contact",
+    "icon": "info-circle",
+    "default_anchor": "contact",
+    "attributes": {
+        "subtitle": {
+            "label": "Subtitle",
+            "type": "string"
+        },
+        "title": {
+            "label": "Title",
+            "type": "string"
+        },
+        "desc": {
+            "label": "Description",
+            "type": "textarea"
+        }
+    }
+}

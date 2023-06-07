@@ -1,5 +1,5 @@
 <?php
-$services = array(
+$default_services = array(
     array(
         "icon" => "house-door",
         "name" => "Website Development",
@@ -25,25 +25,34 @@ $services = array(
         "description" => "Offering a specialized input for existing brands and developing new brands and visual identities from scratch.",
         "more" => "A good asset for projects looking for a strong brand concept and professional visual resources to start up their marketing efforts."
     ),
-)
+);
+
+$services = $blocks['services'];
 ?>
 <section class="services">
     <a class="anchor" id="services"></a>
     <div class="container">
         <div class="content">
-            <p class="pre-title">SERVICES</p>
-            <h2 class="title">Offering high quality services for projects that want to grow.</h2>
+            <p class="pre-title"><?php echo $services['subtitle']; ?></p>
+            <h2 class="title"><?php echo $services['title']; ?></h2>
         </div>
         <div class="main-action">
-            <a href="" class="btn btn-primary">start your project</a>
+            <?php if ($services['main_action']) :
+                $caption = $services['main_action']['caption'];
+                $text = $services['main_action']['text'];
+                $link = $services['main_action']['link'];
+            ?>
+                <div class="caption"><?php echo $caption; ?></div>
+                <a href="<?php echo $link; ?>" class="btn btn-primary"><?php echo $text; ?></a>
+            <?php endif; ?>
         </div>
         <div class="service-view">
-            <?php foreach ($services as $key => $service) : ?>
+            <?php foreach ($services['services'] as $key => $service) : ?>
                 <div class="service">
                     <div class="icon bi-<?php echo $service['icon']; ?>">
                         <span class="icon-bg bi-<?php echo $service['icon']; ?>"></span>
                     </div>
-                    <h3 class="name"><?php echo $service['name']; ?></h3>
+                    <h3 class="name"><?php echo $service['title']; ?></h3>
                     <p class="desc"><?php echo $service['description']; ?></p>
                     <div class="d-flex">
                         <div class="more me-auto">
@@ -52,7 +61,7 @@ $services = array(
                             </button>
                             <div class="collapse" id="<?php echo 'isForMe' . $key; ?>">
                                 <div class="more-content card card-body">
-                                    <?php echo $service['more']; ?>
+                                    <?php echo $service['is_for_me']; ?>
 
                                     <!-- <div class="action">
                                             <a href="" class="btn btn-primary">This is for me!</a>
@@ -66,8 +75,14 @@ $services = array(
             <?php endforeach; ?>
         </div>
         <div class="main-action final">
-            <div class="caption">Still unsure of what your company needs?</div>
-            <a href="" class="btn btn-primary">contact etvo</a>
+            <?php if ($services['final_action']) :
+                $caption = $services['final_action']['caption'];
+                $text = $services['final_action']['text'];
+                $link = $services['final_action']['link'];
+            ?>
+                <div class="caption"><?php echo $caption; ?></div>
+                <a href="<?php echo $link; ?>" class="btn btn-primary"><?php echo $text; ?></a>
+            <?php endif; ?>
         </div>
     </div>
 </section>

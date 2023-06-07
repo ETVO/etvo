@@ -62,8 +62,8 @@
                 data: {
                     function: 'render_block_field',
                     args: JSON.stringify([
-                        index,
-                        block_id,
+                        block_id + ':' + index,
+                        null,
                         block_group_name,
                         allow,
                         expanded,

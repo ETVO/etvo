@@ -6,8 +6,20 @@ include './partials/header.php';
 
 $edit_blocks = $settings['allow_editing_blocks'];
 
+$data_source = 'content';
+
 $model = get_model('content');
-$data = get_data('test');
+$data = get_data($data_source);
+
+if (isset($_POST['form_action'])) {
+    $json = json_encode($_POST);
+
+    $source_file = "./data/$data_source.json";
+
+    file_put_contents($source_file, $json);
+
+    header('Location: content.php');
+}
 
 ?>
 
@@ -36,16 +48,16 @@ $data = get_data('test');
         </div>
     <?php endif; ?>
 
-    <form action="save.php" method="POST" class="model row w-100 m-0">
+    <form action="" method="POST" class="model row w-100 m-0">
+        <input type="hidden" name="form_action" value="POST">
         <div class="model-view col-9">
             <?php foreach ($model as $key => $field) :
 
                 $value = $data[$key] ?? null;
 
-                
+
                 $key = explode(':', $key)[0];
                 render_field($key, $field, $value);
-            
             endforeach; ?>
         </div>
         <div class="col-3">

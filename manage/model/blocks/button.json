@@ -1,0 +1,18 @@
+{
+    "title": "Button",
+    "icon": "box-arrow-right",
+    "attributes": {
+        "caption": {
+            "label": "Caption",
+            "type": "string"
+        },
+        "text": {
+            "label": "Text",
+            "type": "string"
+        },
+        "link": {
+            "label": "Link",
+            "type": "string"
+        }
+    }
+}

@@ -4,7 +4,7 @@
         "type": "string"
     },
     "blocks": {
-        "label": "Blocks",
+        "label": "Main Blocks",
         "type": "blocks"
     }
 }

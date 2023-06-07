@@ -1,0 +1,19 @@
+{
+    "title": "Money",
+    "icon": "piggy-bank",
+    "default_anchor": "money",
+    "attributes": {
+        "subtitle": {
+            "label": "Subtitle",
+            "type": "string"
+        },
+        "title": {
+            "label": "Title",
+            "type": "string"
+        },
+        "desc": {
+            "label": "Description",
+            "type": "textarea"
+        }
+    }
+}

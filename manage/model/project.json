@@ -1,0 +1,22 @@
+{
+    "title": {
+        "label": "Project title",
+        "type": "string"
+    },
+    "link": {
+        "label": "Project link",
+        "type": "string"
+    },
+    "description": {
+        "label": "Project description",
+        "type": "textarea"
+    },
+    "tech": {
+        "label": "Main technologies",
+        "type": "string"
+    },
+    "Images": {
+        "label": "Images",
+        "type": "gallery"
+    }
+}

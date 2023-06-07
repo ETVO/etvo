@@ -5,10 +5,11 @@ $projects = json_decode($projects_json);
 
 // Sort newer to older
 usort($projects, function ($a, $b) {
-    return $a->year < $b->year;
+    return $b->year - $a->year;
 });
 
 
+$portfolio = $blocks['portfolio'];
 ?>
 
 <section class="portfolio">
@@ -16,10 +17,10 @@ usort($projects, function ($a, $b) {
     <div class="container">
         <div class="content">
             <img class="art" src="/assets/img/web-net.svg" alt="">
-            <p class="pre-title">PORTFOLIO</p>
-            <h2 class="title">Take a look at what has been done.</h2>
+            <p class="pre-title"><?php echo $portfolio['subtitle']; ?></p>
+            <h2 class="title"><?php echo $portfolio['title']; ?></h2>
             <p class="desc">
-                Professional, tailor-made, custom-built house for a company, in the web.
+                <?php echo $portfolio['desc']; ?>
             </p>
         </div>
         <div class="projects">
@@ -46,8 +47,14 @@ usort($projects, function ($a, $b) {
         </div>
 
         <div class="action">
-            <div class="caption">Curious if your idea is possible?</div>
-            <a href="" class="btn btn-primary">contact etvo</a>
+            <?php if ($portfolio['final_action']) :
+                $caption = $portfolio['final_action']['caption'];
+                $text = $portfolio['final_action']['text'];
+                $link = $portfolio['final_action']['link'];
+            ?>
+                <div class="caption"><?php echo $caption; ?></div>
+                <a href="<?php echo $link; ?>" class="btn btn-primary"><?php echo $text; ?></a>
+            <?php endif; ?>
         </div>
     </div>
 </section>

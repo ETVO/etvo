@@ -1,0 +1,21 @@
+{
+    "title": "Empresarial Santo Antônio",
+    "link": "https://empresarialsantoantonio.com.br/",
+    "description": "One-page responsive website used to promote a commercial real estate development. The website is based on an exclusively developed WordPress theme, and all content can be customized.",
+    "tech": "PHP, JS, WordPress",
+    "images": [
+        {
+            "filename": "1.webp"
+        },
+        {
+            "filename": "2.webp"
+        },
+        {
+            "filename": "3.webp"
+        },
+        {
+            "filename": "4.webp",
+            "style": "width: 300px"
+        }
+    ]
+}

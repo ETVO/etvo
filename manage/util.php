@@ -97,6 +97,10 @@ function render_field($field_name, $field, $value, $parent_block = null, $echo =
                 render_block($value, $field, $name);
                 break;
 
+            case 'block':
+                render_single_block($value, $field, $name);
+                break;
+
         endswitch;
 
         ?>
@@ -165,10 +169,17 @@ function render_block($blocks, $field_attributes, $block_group_name = null)
 
 function render_block_field($block_id, $block, $block_group_name, $allow = [], $expanded = false, $header_tag = 'h3')
 {
+    $explode_id = explode(':', $block_id);
+    $block_id = $explode_id[0];
 
-    $block_id = explode(':', $block_id);
-    $index = $block_id[1];
-    $block_id = $block_id[0];
+    if (isset($explode_id[1])) {
+        $index = ':' . $explode_id[1];
+    } else if (is_array($block)) {
+        $index = null;
+    } else {
+        $index = null;
+        $block_id = $block;
+    }
 
     $block_model = get_block_model($block_id);
 
@@ -180,7 +191,7 @@ function render_block_field($block_id, $block, $block_group_name, $allow = [], $
     $accordion_title = $block_model['title'];
 
     $block_field_name = ($block_group_name)
-        ? $block_group_name . '[' . $block_id . ':' . $index . ']'
+        ? $block_group_name . '[' . $block_id . $index . ']'
         : $block_id;
 
     ?>
@@ -216,7 +227,7 @@ function render_block_field($block_id, $block, $block_group_name, $allow = [], $
                 <?php foreach ($block_model['attributes'] as $key => $field) :
 
                     $value = $block[$key] ?? null;
-                    
+
                     render_field($key, $field, $value, $block_field_name);
 
                 endforeach; ?>
@@ -225,6 +236,58 @@ function render_block_field($block_id, $block, $block_group_name, $allow = [], $
     </fieldset>
 <?php
 }
+
+function render_single_block($block, $field, $block_group_name = null)
+{
+    $expanded = false;
+    $header_tag = ($expanded) ? 'h3' : 'h4';
+
+    $block_id = $field['block_id'];
+
+    $block_model = get_block_model($block_id);
+
+    if (isset($block_model['expanded']))
+        $expanded = $block_model['expanded'];
+
+    $accordion_id = $block_id . random_int(0, 99);
+
+    $accordion_title = $block_model['title'];
+
+    $block_field_name = ($block_group_name)
+        ? $block_group_name
+        : $block_id;
+
+?>
+    <fieldset class="block-field accordion-item" name="<?php echo $block_field_name; ?>">
+        <<?php echo $header_tag; ?> class="block-title accordion-header" id="heading_<?php echo $accordion_id; ?>">
+            <button class="btn-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<?php echo $accordion_id; ?>" aria-expanded="true" aria-controls="collapse_<?php echo $accordion_id; ?>">
+                <span class="bi-<?php echo $block_model['icon']; ?>"></span>
+                <?php echo $accordion_title; ?>
+            </button>
+        </<?php echo $header_tag; ?>>
+
+
+        <div id="collapse_<?php echo $accordion_id; ?>" class="accordion-collapse collapse <?php if ($expanded) echo 'show'; ?>" aria-labelledby="heading_<?php echo $accordion_id; ?>">
+
+            <div class="accordion-body">
+                <?php foreach ($block_model['attributes'] as $key => $field) :
+
+                    $value = $block[$key] ?? null;
+
+                    render_field($key, $field, $value, $block_field_name);
+
+                endforeach; ?>
+            </div>
+        </div>
+    </fieldset>
+<?php
+
+}
+
+function render_single_block_field($block_id, $block, $block_group_name, $allow = [], $expanded = false, $header_tag = 'h3')
+{
+}
+
 
 function get_block_model($id)
 {

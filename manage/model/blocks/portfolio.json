@@ -1,0 +1,24 @@
+{
+    "title": "Portfolio",
+    "icon": "paperclip",
+    "default_anchor": "portfolio",
+    "attributes": {
+        "subtitle": {
+            "label": "Subtitle",
+            "type": "string"
+        },
+        "title": {
+            "label": "Title",
+            "type": "string"
+        },
+        "desc": {
+            "label": "Description",
+            "type": "textarea"
+        },
+        "final_action": {
+            "label": "Final Action",
+            "type": "block",
+            "block_id": "button"
+        }
+    }
+}
