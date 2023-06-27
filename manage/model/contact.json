@@ -1,0 +1,38 @@
+{
+    "fields": {
+        "first_name": {
+            "label": "First Name",
+            "type": "text",
+            "required": true,
+            "in_row": true
+        },
+        "last_name": {
+            "label": "Last Name",
+            "type": "text",
+            "required": true,
+            "in_row": true
+        },
+        "email": {
+            "label": "Email",
+            "type": "email",
+            "required": true
+        },
+        "industry": {
+            "label": "Industry / Field of Work",
+            "type": "text",
+            "required": false
+        },
+        "message": {
+            "label": "Message",
+            "type": "textarea",
+            "required": false,
+            "attrs": "rows=\"3\""
+        }
+    },
+    "to": "etvo@etvo.me",
+    "subject": "Contact Form Submission",
+    "response": {
+        "success": "Thank you for your message! You will be contacted soon.",
+        "error": "Unfortunately, there was an error. Try again later."
+    }
+}

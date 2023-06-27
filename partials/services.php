@@ -47,7 +47,10 @@ $services = $blocks['services'];
             <?php endif; ?>
         </div>
         <div class="service-view">
-            <?php foreach ($services['services'] as $key => $service) : ?>
+            <?php foreach ($services['services'] as $key => $service) : 
+                $key = implode('', explode(':', $key));
+                $id = 'isForMe' . $key;
+                ?>
                 <div class="service">
                     <div class="icon bi-<?php echo $service['icon']; ?>">
                         <span class="icon-bg bi-<?php echo $service['icon']; ?>"></span>
@@ -56,16 +59,16 @@ $services = $blocks['services'];
                     <p class="desc"><?php echo $service['description']; ?></p>
                     <div class="d-flex">
                         <div class="more me-auto">
-                            <button class="more-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo 'isForMe' . $key; ?>" aria-expanded="false" aria-controls="<?php echo 'isForMe' . $key; ?>">
+                            <button class="more-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $id; ?>" aria-expanded="false" aria-controls="<?php echo 'isForMe' . $key; ?>">
                                 Is this for me? <span class="bi-question-circle"></span>
                             </button>
-                            <div class="collapse" id="<?php echo 'isForMe' . $key; ?>">
+                            <div class="collapse" id="<?php echo $id; ?>">
                                 <div class="more-content card card-body">
                                     <?php echo $service['is_for_me']; ?>
 
-                                    <!-- <div class="action">
-                                            <a href="" class="btn btn-primary">This is for me!</a>
-                                        </div> -->
+                                    <div class="action">
+                                        <a href="#contact" class="btn btn-primary">This is for me!</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

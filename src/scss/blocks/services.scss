@@ -6,6 +6,7 @@ $accent_color: #e52a49;
     z-index: 0;
     padding: 3rem 0;
     background-color: var(--bs-dark);
+    box-shadow: 0 20px 50px 20px inset rgba(#000, .6);
 
     color: white;
 
@@ -30,7 +31,7 @@ $accent_color: #e52a49;
     }
 
     &::after {
-        // content: url("/assets/img/web-red.svg");
+        content: url("/assets/img/web-red.svg");
 
         position: absolute;
         z-index: -1;
@@ -92,6 +93,7 @@ $accent_color: #e52a49;
         flex-wrap: wrap;
 
         backdrop-filter: blur(5px);
+        box-shadow: 0 0 20px rgba(#000, .2);
         border-radius: 0.5rem;
         margin-left: -2rem;
         margin-right: -2rem;
@@ -102,8 +104,9 @@ $accent_color: #e52a49;
             display: flex;
             flex-flow: column;
 
+
             width: 50%;
-            padding: 1rem 2rem;
+            padding: 2rem 2rem 2rem;
 
             &:nth-child(n) {
                 padding-right: 1rem;
@@ -113,9 +116,9 @@ $accent_color: #e52a49;
             }
 
             .icon {
-                font-size: 3.5rem;
                 position: relative;
                 z-index: 2;
+                font-size: 3.5rem;
 
                 .icon-bg {
                     position: absolute;
@@ -148,7 +151,7 @@ $accent_color: #e52a49;
 
                 padding: 0;
 
-                margin-left: -1rem;
+                // margin-left: -1rem;
 
                 font-family: "Lora", serif;
                 font-style: italic;

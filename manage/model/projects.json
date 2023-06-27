@@ -1,0 +1,14 @@
+{
+    "projects": {
+        "label": "Projects",
+        "type": "blocks",
+        "allowed_blocks": [
+            "project"
+        ],
+        "allow": {
+            "add": true,
+            "remove": true,
+            "reorder": true
+        }
+    }
+}

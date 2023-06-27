@@ -1,6 +1,20 @@
 <?php
 
+include './manage/util/form_util.php';
+
+$contact_model_json = file_get_contents('./manage/model/contact.json');
+$contact_model = json_decode($contact_model_json, true, 512, JSON_FORCE_OBJECT);
+
 $contact = $blocks['contact'];
+
+$form_status = isset($_GET['form_status'])
+    ? $_GET['form_status']
+    : '';
+
+$form_message = isset($_GET['form_message'])
+    ? $_GET['form_message']
+    : '';
+
 ?>
 <section class="contact">
     <a class="anchor" id="contact"></a>
@@ -16,31 +30,25 @@ $contact = $blocks['contact'];
                     <?php echo $contact['desc']; ?>
                 </p>
                 <div class="form">
-                    <form action="">
-                        <div class="mb-3 row g-3">
-                            <div class="col-6">
-                                <label for="firstname">First Name</label>
-                                <input type="text" name="firstname" class="form-control" required>
-                            </div>
-                            <div class="col-6">
-                                <label for="lastname">Last Name</label>
-                                <input type="text" name="lastname" class="form-control" required>
+                    <form id="contact-form" action="/manage/util/send_mail.php" method="post" novalidate>
+                        <div id="form-message" class="<?php if ($form_status) echo $form_status ?>">
+                            <div class="message">
+                                <?php echo $form_message; ?>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="industry">Industry / Field of Work</label>
-                            <input type="text" name="industry" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message">Message</label>
-                            <textarea name="message" class="form-control" rows="4"></textarea>
+                        <div class="fields">
+                            <?php
+                            render_form_fields($contact_model['fields']);
+                            ?>
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-primary ms-auto">
+                                    send message
+                                    <span class="bi-arrow-clockwise" id="spinner" style="display: none;"></span>
+                                </button>
+                            </div>
                         </div>
                     </form>
-                </div> 
+                </div>
             </div>
         </div>
     </div>

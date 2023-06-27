@@ -1,9 +1,10 @@
+import './image_upload.js';
 
 (jQuery)(
     function ($) {
-        // render_block_field($block, $block_group_name, $allow, $expanded, $header_tag);
+        const UTIL_URL = '/manage/util/';
 
-        $('form').on('submit', function(e) {
+        $('form').on('submit', function (e) {
             e.preventDefault();
             $('input.render-helper').attr('disabled', true);
             this.submit();
@@ -58,7 +59,7 @@
             }
 
             $.ajax({
-                url: '/manage/use_util.php',
+                url: UTIL_URL + 'use_util.php',
                 data: {
                     function: 'render_block_field',
                     args: JSON.stringify([
@@ -73,8 +74,10 @@
                 dataType: "html",
                 success: function (data) {
                     $blocks_div.append(data);
+                    trackFieldAsTitle($blocks_div.children('.block-field').last());
                 }
             });
+
 
         });
 
@@ -125,6 +128,28 @@
                 name[name.length - 2] = i.toString();
                 name = name.join('][');
                 $(el).attr('name', name);
+            });
+        }
+
+        $('.block-field').each(function () { trackFieldAsTitle(this) });
+
+        function trackFieldAsTitle(blockField) {
+            const field_as_title = $(blockField).data('field-as-title');
+            if (field_as_title == '') return;
+
+            const blockName = $(blockField).attr('name');
+
+            var fieldName = blockName + '[' + field_as_title + ']';
+
+            var blockTitle = $(blockField).find('#blockTitle');
+            $(blockField).find('[name="' + fieldName + '"').on('keyup change', function () {
+                console.log($(this).val());
+                if ($(this).val() != '') {
+                    blockTitle.text($(this).val());
+                }
+                else {
+                    blockTitle.text(blockTitle.data('og-title'));
+                }
             });
         }
 

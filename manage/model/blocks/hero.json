@@ -2,6 +2,7 @@
     "title": "Hero",
     "icon": "easel",
     "default_anchor": "hero",
+    "expanded":true,
     "attributes": {
         "title": {
             "label": "Title",
@@ -10,6 +11,11 @@
         "desc": {
             "label": "Description",
             "type": "textarea"
+        },
+        "image": {
+            "label": "Image",
+            "type": "block",
+            "block_id": "image"
         }
     }
 }

@@ -1,7 +1,9 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-include 'util.php';
+include dirname(__FILE__) . '/../util.php';
+
+$password = 123;
 
 $function = $_GET['function'];
 $args = isset($_GET['args'])

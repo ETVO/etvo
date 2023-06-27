@@ -1,13 +1,12 @@
 <?php
 
-define('DATA_PATH', './data/');
-define('MODEL_PATH', './model/');
+define('DATA_PATH', dirname(__FILE__) . './data/');
+define('MODEL_PATH', dirname(__FILE__) . './model/');
 
 $settings = null;
 
 // Read settings
-$settings_json = file_get_contents(DATA_PATH . '/settings.json');
-$settings = json_decode($settings_json, true);
+$settings = get_data('settings');
 
 function get_available_blocks()
 {
@@ -46,8 +45,8 @@ function get_model($name)
 
 function get_data($name)
 {
-    $model_json = file_get_contents(DATA_PATH . "/$name.json");
-    return json_decode($model_json, true);
+    $data_json = file_get_contents(DATA_PATH . "/$name.json");
+    return json_decode($data_json, true);
 }
 
 function render_field($field_name, $field, $value, $parent_block = null, $echo = true)
@@ -83,6 +82,38 @@ function render_field($field_name, $field, $value, $parent_block = null, $echo =
             case 'textarea':
             ?>
                 <textarea name="<?php echo $name; ?>" id="<?php echo $name ?>" class="form-control" rows="2"><?php echo $value; ?></textarea>
+            <?php
+                break;
+
+            case 'image':
+            ?>
+                <div class="image-upload">
+                    <input type="hidden" name="has_image[]" value="<?php echo $name ?>">
+
+                    <?php if ($value) : ?>
+                        <img class="preview" src="<?php echo $value; ?>">
+                    <?php else : ?>
+                        <img class="preview" style="display: none;">
+                    <?php endif; ?>
+                    <button class="remove btn icon-btn my-2" type="button" title="Remove block" <?php if (!$value) echo 'style="display: none;"' ?>>
+                        <span class="icon bi-x-lg"></span>
+                        <span class="text">Remove</span>
+                    </button>
+
+                    <input type="file" class="file form-control" name="<?php echo $name ?>" id="<?php echo $name ?>" style="display: none">
+                    <input type="text" class="url form-control" name="<?php echo $name ?>" id="<?php echo $name ?>" style="display: none" placeholder="Image URL">
+
+                    <div class="d-flex load-options mb-2">
+                        <button class="as-file btn icon-btn me-2" type="button" title="Remove block">
+                            <span class="icon bi-file-earmark-image"></span>
+                            <span class="text">Load as File</span>
+                        </button>
+                        <button class="as-url btn icon-btn" type="button" title="Remove block">
+                            <span class="icon bi-link-45deg"></span>
+                            <span class="text">Load by URL</span>
+                        </button>
+                    </div>
+                </div>
             <?php
                 break;
 
@@ -188,18 +219,25 @@ function render_block_field($block_id, $block, $block_group_name, $allow = [], $
 
     $accordion_id = $block_id . random_int(0, 99);
 
-    $accordion_title = $block_model['title'];
+    $field_as_title = $block_model['field_as_title'] ?? '';
+
+    $accordion_title = ($field_as_title && is_array($block) && $block[$field_as_title])
+        ? $block[$field_as_title]
+        : $block_model['title'];
 
     $block_field_name = ($block_group_name)
         ? $block_group_name . '[' . $block_id . $index . ']'
-        : $block_id;
+        : $block_group_name;
+
 
     ?>
-    <fieldset class="block-field accordion-item" name="<?php echo $block_field_name; ?>">
+    <fieldset class="block-field accordion-item" name="<?php echo $block_field_name; ?>" data-field-as-title="<?php echo $field_as_title; ?>">
         <<?php echo $header_tag; ?> class="block-title accordion-header" id="heading_<?php echo $accordion_id; ?>">
             <button class="btn-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<?php echo $accordion_id; ?>" aria-expanded="true" aria-controls="collapse_<?php echo $accordion_id; ?>">
-                <span class="bi-<?php echo $block_model['icon']; ?>"></span>
-                <?php echo $accordion_title; ?>
+                <span class="icon bi-<?php echo $block_model['icon']; ?>"></span>
+                <span class="title" id="blockTitle" data-og-title="<?php echo $accordion_title; ?>">
+                    <?php echo $accordion_title; ?>
+                </span>
             </button>
         </<?php echo $header_tag; ?>>
 
@@ -261,8 +299,10 @@ function render_single_block($block, $field, $block_group_name = null)
     <fieldset class="block-field accordion-item" name="<?php echo $block_field_name; ?>">
         <<?php echo $header_tag; ?> class="block-title accordion-header" id="heading_<?php echo $accordion_id; ?>">
             <button class="btn-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<?php echo $accordion_id; ?>" aria-expanded="true" aria-controls="collapse_<?php echo $accordion_id; ?>">
-                <span class="bi-<?php echo $block_model['icon']; ?>"></span>
-                <?php echo $accordion_title; ?>
+                <span class="icon bi-<?php echo $block_model['icon']; ?>"></span>
+                <span class="text">
+                    <?php echo $accordion_title; ?>
+                </span>
             </button>
         </<?php echo $header_tag; ?>>
 

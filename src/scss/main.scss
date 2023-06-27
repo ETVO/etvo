@@ -50,9 +50,39 @@ form {
     border-radius: 0;
 }
 
+$primary_color: var(--bs-primary);
+
+.btn-primary {
+    color: white;
+
+    &:hover {
+        color: white;
+    }
+
+    &:active {
+
+    }
+}
+
 a.anchor {
     display: block;
     position: relative;
     top: -200px;
     visibility: hidden;
 }
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#spinner {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+    opacity: 0.75;
+}
+

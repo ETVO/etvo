@@ -48,8 +48,9 @@ if (isset($_POST['form_action'])) {
         </div>
     <?php endif; ?>
 
-    <form action="" method="POST" class="model row w-100 m-0">
+    <form action="./save.php" method="POST" class="model row w-100 m-0" enctype="multipart/form-data">
         <input type="hidden" name="form_action" value="POST">
+        <input type="hidden" name="data_source" value="<?php echo $data_source; ?>">
         <div class="model-view col-9">
             <?php foreach ($model as $key => $field) :
 

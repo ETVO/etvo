@@ -1,5 +1,6 @@
 import 'bootstrap';
 import 'fslightbox';
+import './contact.js';
 
 (jQuery)(
     function ($) {
@@ -49,11 +50,11 @@ import 'fslightbox';
 
         });
 
-        $('#closeModal').on('click', function() {
+        $('#closeModal').on('click', function () {
             $('#projectModal').fadeOut(200);
         });
-        $('#projectModal').on('click', function(e) {
-            if(e.target.id == 'projectModal')
+        $('#projectModal').on('click', function (e) {
+            if (e.target.id == 'projectModal')
                 $('#projectModal').fadeOut(200);
         });
     }

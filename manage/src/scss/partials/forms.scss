@@ -17,6 +17,16 @@
                     padding: 0 !important;
                 }
             }
+
+            .image-upload {
+                input {
+                    margin-bottom: 1rem;
+                }
+                .preview {
+                    width: 300px;
+                    border: solid 1px #ccc;
+                }
+            }
         }
 
         .block-field {
@@ -50,7 +60,7 @@
                     > .accordion-header {
                         margin-left: 0;
                         button {
-                            span {
+                            .icon {
                                 color: #ed2647 !important;
                             }
                         }
@@ -71,7 +81,7 @@
                         width: 100%;
                         border: none;
                         background: none;
-                        span {
+                        .icon {
                             margin-right: 0.5rem;
                             transition: color 0.1s;
                             color: rgba(#000, 0.6);

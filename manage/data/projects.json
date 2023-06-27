@@ -1,12 +1,1 @@
-[
-    {
-        "name": "Competencias del Voleibol",
-        "slug": "voleibol-competencias",
-        "year": 2018
-    },
-    {
-        "name": "Empresarial Santo Antônio",
-        "slug": "empresarial-santo-antonio",
-        "year": 2020
-    }
-]
+{"form_action":"POST","data_source":"projects","projects":{"project":{"title":"Voleibol Competencias","link":"","description":"","tech":""}},"has_image":["projects[project][images]"]}

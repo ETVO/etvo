@@ -1,0 +1,28 @@
+{
+    "title": "Project",
+    "icon": "box",
+    "default_anchor": "project",
+    "field_as_title": "title",
+    "attributes": {
+        "title": {
+            "label": "Project title",
+            "type": "string"
+        },
+        "link": {
+            "label": "Project link",
+            "type": "string"
+        },
+        "description": {
+            "label": "Project description",
+            "type": "textarea"
+        },
+        "tech": {
+            "label": "Technologies",
+            "type": "string"
+        },
+        "images": {
+            "label": "Images",
+            "type": "image"
+        }
+    }
+}

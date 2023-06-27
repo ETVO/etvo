@@ -3,7 +3,7 @@
     font-size: 0.95rem;
 }
 
-@import "./partials/header.scss";
+@import "./partials/header-footer.scss";
 @import "./partials/main-container.scss";
 @import "./partials/content.scss";
 @import "./partials/forms.scss";
@@ -78,6 +78,14 @@ form {
 }
 
 .btn.btn-remove-block {
+    border-color: var(--bs-primary);
+
+    span.text {
+        color: var(--bs-primary);
+    }
+}
+
+.btn.remove {
     border-color: var(--bs-primary);
 
     span.text {
