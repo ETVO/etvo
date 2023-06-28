@@ -56,9 +56,9 @@ function get_data($name)
     return json_decode($data_json, true);
 }
 
-function get_data_from_dir($uri)
+function get_data_from_dir($dir)
 {
-    $data_json = file_get_contents($uri);
+    $data_json = file_get_contents($dir);
     if (!$data_json) return null;
     return json_decode($data_json, true);
 }
@@ -136,6 +136,9 @@ function render_field($field_name, $field, $value, $parent_block = null, $echo =
 
             case 'blocks':
                 $save_in_dir = $field['save_in_dir'] ?? false;
+                $keep_fields = (isset($field['keep_fields']))
+                    ? htmlspecialchars(json_encode($field['keep_fields']))
+                    : "";
 
                 $allowed_blocks = (isset($field['allowed_blocks']))
                     ? htmlspecialchars(json_encode($field['allowed_blocks']))
@@ -143,6 +146,7 @@ function render_field($field_name, $field, $value, $parent_block = null, $echo =
             ?>
                 <?php if ($save_in_dir) : ?>
                     <input type="hidden" name="save_in_dir[]" value="<?php echo $name; ?>">
+                    <input type="hidden" name="keep_fields[]" value="<?php echo $keep_fields; ?>">
                 <?php endif; ?>
                 <input type="hidden" class="render-helper" name="allowed_blocks" value="<?php echo $allowed_blocks; ?>">
                 <input type="hidden" class="render-helper" name="block_group_name" value="<?php echo $name; ?>">
@@ -176,7 +180,7 @@ function render_block($blocks, $field_attributes, $block_group_name = null, $sav
 
     if ($save_in_dir) {
         foreach ($blocks as $key => $block_path) {
-            $blocks[$key] = get_data_from_dir($block_path['dir']);
+            $blocks[$key] = get_data_from_dir($block_path['filepath']['dir']);
         }
     }
 
@@ -243,13 +247,11 @@ function render_block_field($block_id, $block, $block_group_name, $allow = [], $
 
     $explode_id = explode(':', $block_id);
     $block_id = $explode_id[0];
-
+    
+    $index = ':' . 0;
     if (isset($explode_id[1])) {
         $index = ':' . $explode_id[1];
-    } else if (is_array($block)) {
-        $index = null;
-    } else {
-        $index = null;
+    } else if (!is_array($block)) {
         $block_id = $block;
     }
 

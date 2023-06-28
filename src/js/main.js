@@ -17,22 +17,23 @@ import './contact.js';
         });
 
         $('.project').on('click', function () {
-            var slug = $(this).data('project-slug');
+            var path = $(this).data('project-path');
             var year = $(this).data('project-year');
 
-            $.getJSON('/projects/' + slug + '.json', function (info) {
+            $.getJSON(path, function (info) {
+                console.log(info);
 
                 var images = (() => {
                     let images = [];
-                    info.images.forEach((image) => {
-                        var src = '/assets/img/projects/';
-                        src += slug + '/';
-                        src += image.filename;
-
+                    let imageKeys =Object.keys(info.images);
+                    imageKeys.forEach((key) => {
+                        var image = info.images[key];
+                        var src = image.src;    
                         var style = image.style ?? '';
-
+    
                         images.push(`<img src="${src}" style="${style}" />`);
-                    });
+                    }) 
+                    
                     return images;
                 })();
 

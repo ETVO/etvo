@@ -3,7 +3,6 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['data_source'])) {
     $data_source = $_POST['data_source'];
     $processed_data = $_POST;
-    print_r($_POST);
 
     $has_image = isset($_POST['has_image'])
         ? $_POST['has_image']
@@ -15,12 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['data_source'])) {
         : null;
 
     save_in_dir($processed_data, $save_in_dir);
-    print_r($processed_data);
 
     unset($processed_data['form_action']);
     unset($processed_data['data_source']);
     unset($processed_data['has_image']);
     unset($processed_data['save_in_dir']);
+    unset($processed_data['keep_fields']);
 
     $json = json_encode($processed_data);
 
@@ -120,11 +119,12 @@ function save_in_dir(&$data, $save_in_dir)
     if (!$data || !$save_in_dir) return; // early bird gets the worm 
 
     $data_source = $data['data_source'] ?? '';
+    $keep_fields = $data['keep_fields'] ?? '';
 
     $upload_dir = realpath(dirname(__FILE__)) . "/data/$data_source/";
     $upload_uri = dirname($_SERVER['PHP_SELF']) . "/data/$data_source/";
 
-    foreach ($save_in_dir as $field_key) {
+    foreach ($save_in_dir as $save_index => $field_key) {
         $field_to_save = $data[$field_key];
 
         foreach ($field_to_save as $key => $block) {
@@ -137,11 +137,24 @@ function save_in_dir(&$data, $save_in_dir)
                 mkdir($upload_dir, 0755, true);
             }
 
-            $data[$field_key][$key] = array(
+            $block_data = &$data[$field_key][$key];
+
+            if (isset($keep_fields[$save_index])) {
+                $keep = json_decode($keep_fields[$save_index]);
+
+                $block_data = array_intersect_key($block_data, array_flip($keep));
+            }
+
+            $block_data['filepath'] = array(
                 'dir' => $block_filepath,
                 'uri' => $upload_uri . $block_slug . '.json',
                 'slug' => $block_slug,
             );
+
+            echo "\n\nStaying in source file:\n";
+            print_r($block_data);
+            echo "\n\nGoing to new file:\n";
+            print_r($block);
 
             $json = json_encode($block);
 

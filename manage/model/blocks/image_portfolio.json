@@ -1,0 +1,14 @@
+{
+    "title": "Image w/ Style",
+    "icon": "image",
+    "attributes": {
+        "src": {
+            "label": "Image",
+            "type": "image"
+        },
+        "style": {
+            "label": "Additional Style",
+            "type": "string"
+        }
+    }
+}

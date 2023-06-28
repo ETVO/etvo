@@ -10,6 +10,9 @@
             "remove": true,
             "reorder": true
         },
-        "save_in_dir": true
+        "save_in_dir": true,
+        "keep_fields": [
+            "year", "title", "thumbnail"    
+        ]
     }
 }

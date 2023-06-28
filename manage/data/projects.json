@@ -1,14 +1,1 @@
-{
-    "projects": {
-        "project": {
-            "dir": "C:\\laragon\\www\\etvo\\manage\/data\/projects\/project.json",
-            "uri": "\/manage\/data\/projects\/project.json",
-            "slug": "project"
-        },
-        "project:1": {
-            "dir": "C:\\laragon\\www\\etvo\\manage\/data\/projects\/project_1.json",
-            "uri": "\/manage\/data\/projects\/project_1.json",
-            "slug": "project_1"
-        }
-    }
-}
+{"projects":{"project:0":{"year":"2018","title":"Competencias del Voleibol","thumbnail":"\/manage\/data\/uploads\/projects\/projects_project_0_thumbnail.webp","filepath":{"dir":"C:\\laragon\\www\\etvo\\manage\/data\/projects\/project_0.json","uri":"\/manage\/data\/projects\/project_0.json","slug":"project_0"}},"project:1":{"year":"2020","title":"Empresarial Santo Ant\u00f4nio","thumbnail":"\/manage\/data\/uploads\/projects\/projects_project_1_thumbnail.webp","filepath":{"dir":"C:\\laragon\\www\\etvo\\manage\/data\/projects\/project_1.json","uri":"\/manage\/data\/projects\/project_1.json","slug":"project_1"}}}}

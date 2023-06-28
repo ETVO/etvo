@@ -12,6 +12,10 @@
             "label": "Title",
             "type": "string"
         },
+        "thumbnail": {
+            "label": "Thumbnail",
+            "type": "image"
+        },
         "link": {
             "label": "Link",
             "type": "string"
