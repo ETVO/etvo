@@ -1,0 +1,19 @@
+{
+    "title": "Image w/ Alt",
+    "icon": "image",
+    "field_as_title": "alt",
+    "attributes": {
+        "alt": {
+            "label": "Alt text",
+            "type": "string"
+        },
+        "src": {
+            "label": "Image",
+            "type": "image"
+        },
+        "link": {
+            "label": "Link",
+            "type": "string"
+        }
+    }
+}

@@ -2,17 +2,9 @@
     "title": "Image",
     "icon": "image",
     "attributes": {
-        "alt": {
-            "label": "Alt text",
-            "type": "string"
-        },
         "src": {
             "label": "Image",
             "type": "image"
-        },
-        "link": {
-            "label": "Link",
-            "type": "string"
         }
     }
 }

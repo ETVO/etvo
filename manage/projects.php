@@ -27,7 +27,7 @@ $data = get_data($data_source);
 
 
                 $key = explode(':', $key)[0];
-                render_field($key, $field, $value);
+                render_field($key, $field, $value, null, true, $data_source);
             endforeach; ?>
         </div>
         <div class="col-3">

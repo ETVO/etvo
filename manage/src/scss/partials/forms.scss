@@ -29,6 +29,28 @@
             }
         }
 
+        .add-new {
+            margin-top: 0.5rem;
+            margin-left: -0.6rem;
+
+            &.top-level {
+                margin-top: 0.5rem;
+                margin-left: -1rem;
+                .icon-btn {
+                    font-size: 1rem !important;
+                }
+            }
+
+            small {
+                margin: auto;
+                line-height: 1;
+                font-size: 0.85rem;
+                color: rgba(#000, 0.5);
+                font-style: italic;
+                font-family: "Lora", serif;
+            }
+        }
+
         .block-field {
             border-left: solid 2px rgba(#000, 0.1);
             padding: 0.75rem 1.25rem 0.75rem;
@@ -37,19 +59,6 @@
 
             .field:first-child {
                 margin-top: 0;
-            }
-
-            .add-new {
-                margin-top: .5rem;
-                margin-left: -.6rem;
-                small{
-                    margin: auto;
-                    line-height: 1;
-                    font-size: .85rem;
-                    color: rgba(#000, .5);
-                    font-style: italic;
-                    font-family: 'Lora', serif;
-                }
             }
 
             &.accordion-item {
@@ -90,6 +99,10 @@
                         &:hover {
                             opacity: 0.7;
                         }
+
+                        .img-preview {
+                            height: 60px;
+                        }
                     }
                 }
 
@@ -100,8 +113,8 @@
                         display: flex;
 
                         button {
-                            margin-right: .75rem;
-                            font-size: .7rem;
+                            margin-right: 0.75rem;
+                            font-size: 0.7rem;
                             &:last-child {
                                 margin-right: 0;
                             }

@@ -9,6 +9,7 @@
             "add": true,
             "remove": true,
             "reorder": true
-        }
+        },
+        "save_in_dir": true
     }
 }

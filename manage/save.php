@@ -1,15 +1,26 @@
 <?php
 
-if (isset($_POST['data_source'])) {
-
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['data_source'])) {
     $data_source = $_POST['data_source'];
+    $processed_data = $_POST;
+    print_r($_POST);
 
     $has_image = isset($_POST['has_image'])
         ? $_POST['has_image']
         : null;
-
-    $processed_data = $_POST;
     save_images($processed_data, $has_image);
+
+    $save_in_dir = isset($_POST['save_in_dir'])
+        ? $_POST['save_in_dir']
+        : null;
+
+    save_in_dir($processed_data, $save_in_dir);
+    print_r($processed_data);
+
+    unset($processed_data['form_action']);
+    unset($processed_data['data_source']);
+    unset($processed_data['has_image']);
+    unset($processed_data['save_in_dir']);
 
     $json = json_encode($processed_data);
 
@@ -17,7 +28,7 @@ if (isset($_POST['data_source'])) {
 
     file_put_contents($source_file, $json);
 
-    // header("Location: $data_source.php");
+    header("Location: $data_source.php");
 }
 
 function save_images(&$data, $has_image)
@@ -31,9 +42,14 @@ function save_images(&$data, $has_image)
 
     foreach ($has_image as $image_key) {
         $key_parts = explode('[', str_replace(']', '', $image_key));
+        $src = get_value_by_key_parts($data, $key_parts);
+
+        // Image is saved as URL or value is unchanged
+        if ($src) continue;
 
         $image = get_file_by_key_parts($_FILES, $key_parts);
 
+        // Image was not uploaded
         if (!$image || (isset($image['error']) && $image['error'] == 4)) continue;
 
         $upload_name = implode('_', $key_parts);
@@ -83,7 +99,7 @@ function upload_image($image, $upload_dir, $upload_name)
         $i++;
     }
 
-    if($new_upload_name) $upload_name = $new_upload_name;
+    if ($new_upload_name) $upload_name = $new_upload_name;
 
     // Check file size
     if ($image["size"] > 5000000) return false;
@@ -98,9 +114,44 @@ function upload_image($image, $upload_dir, $upload_name)
         return false;
 }
 
+
+function save_in_dir(&$data, $save_in_dir)
+{
+    if (!$data || !$save_in_dir) return; // early bird gets the worm 
+
+    $data_source = $data['data_source'] ?? '';
+
+    $upload_dir = realpath(dirname(__FILE__)) . "/data/$data_source/";
+    $upload_uri = dirname($_SERVER['PHP_SELF']) . "/data/$data_source/";
+
+    foreach ($save_in_dir as $field_key) {
+        $field_to_save = $data[$field_key];
+
+        foreach ($field_to_save as $key => $block) {
+            $block_slug = str_replace(':', '_', $key);
+
+            $block_filepath = $upload_dir . $block_slug . '.json';
+
+            // Check if directory exists
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0755, true);
+            }
+
+            $data[$field_key][$key] = array(
+                'dir' => $block_filepath,
+                'uri' => $upload_uri . $block_slug . '.json',
+                'slug' => $block_slug,
+            );
+
+            $json = json_encode($block);
+
+            file_put_contents($block_filepath, $json);
+        }
+    }
+}
+
 function get_file_by_key_parts($array, $key_parts)
 {
-
     $value = array();
 
     if (isset($array[$key_parts[0]])) {
@@ -108,7 +159,7 @@ function get_file_by_key_parts($array, $key_parts)
     }
 
     foreach ($array as $prop_key => $file_props) {
-        $result = $array[$prop_key];
+        $result = $file_props;
         foreach ($key_parts as $i => $part) {
             if ($i == 0) continue;
 
@@ -122,11 +173,8 @@ function get_file_by_key_parts($array, $key_parts)
     return $value;
 }
 
-
-
-function get_value_by_key($array, $key)
+function get_value_by_key_parts($array, $key_parts)
 {
-    $key_parts = explode('[', str_replace(']', '', $key));
     foreach ($key_parts as $part) {
         if (isset($array[$part])) {
             $array = $array[$part];

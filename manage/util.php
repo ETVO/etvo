@@ -40,21 +40,37 @@ function get_available_blocks()
 function get_model($name)
 {
     $model_json = file_get_contents(MODEL_PATH . "/$name.json");
+    if (!$model_json) return null;
     return json_decode($model_json, true);
+}
+
+function get_block_model($id)
+{
+    return get_model("blocks/$id");
 }
 
 function get_data($name)
 {
     $data_json = file_get_contents(DATA_PATH . "/$name.json");
+    if (!$data_json) return null;
     return json_decode($data_json, true);
 }
 
-function render_field($field_name, $field, $value, $parent_block = null, $echo = true)
+function get_data_from_dir($uri)
+{
+    $data_json = file_get_contents($uri);
+    if (!$data_json) return null;
+    return json_decode($data_json, true);
+}
+
+function render_field($field_name, $field, $value, $parent_block = null, $echo = true, $data_source = null)
 {
     $type = $field['type'];
     $label = $field['label'];
 
-    $name = ($parent_block)
+    $has_parent = $parent_block != null;
+
+    $name = ($has_parent)
         ? $parent_block . '[' . $field_name . ']'
         : $field_name;
 
@@ -95,13 +111,14 @@ function render_field($field_name, $field, $value, $parent_block = null, $echo =
                     <?php else : ?>
                         <img class="preview" style="display: none;">
                     <?php endif; ?>
-                    <button class="remove btn icon-btn my-2" type="button" title="Remove block" <?php if (!$value) echo 'style="display: none;"' ?>>
+                    <button class="remove btn icon-btn my-2" type="button" title="Remove image" <?php if (!$value) echo 'style="display: none;"' ?>>
                         <span class="icon bi-x-lg"></span>
                         <span class="text">Remove</span>
                     </button>
 
-                    <input type="file" class="file form-control" name="<?php echo $name ?>" id="<?php echo $name ?>" style="display: none">
-                    <input type="text" class="url form-control" name="<?php echo $name ?>" id="<?php echo $name ?>" style="display: none" placeholder="Image URL">
+                    <input type="file" class="file form-control" name="<?php echo $name ?>" style="display: none">
+                    <input type="text" class="url form-control" name="<?php echo $name ?>" style="display: none" placeholder="Image URL">
+                    <input type="hidden" class="value" name="<?php echo $name ?>" style="display: none" value="<?php echo $value; ?>">
 
                     <div class="d-flex load-options mb-2">
                         <button class="as-file btn icon-btn me-2" type="button" title="Remove block">
@@ -118,14 +135,19 @@ function render_field($field_name, $field, $value, $parent_block = null, $echo =
                 break;
 
             case 'blocks':
+                $save_in_dir = $field['save_in_dir'] ?? false;
+
                 $allowed_blocks = (isset($field['allowed_blocks']))
                     ? htmlspecialchars(json_encode($field['allowed_blocks']))
                     : "[\"all\"]";
             ?>
+                <?php if ($save_in_dir) : ?>
+                    <input type="hidden" name="save_in_dir[]" value="<?php echo $name; ?>">
+                <?php endif; ?>
                 <input type="hidden" class="render-helper" name="allowed_blocks" value="<?php echo $allowed_blocks; ?>">
                 <input type="hidden" class="render-helper" name="block_group_name" value="<?php echo $name; ?>">
         <?php
-                render_block($value, $field, $name);
+                render_block($value, $field, $name, $save_in_dir, $has_parent);
                 break;
 
             case 'block':
@@ -149,13 +171,17 @@ function render_field($field_name, $field, $value, $parent_block = null, $echo =
         return $output;
 }
 
-function render_block($blocks, $field_attributes, $block_group_name = null)
+function render_block($blocks, $field_attributes, $block_group_name = null, $save_in_dir = false, $has_parent = true)
 {
-    $expanded = false;
-    $header_tag = ($expanded) ? 'h3' : 'h4';
+
+    if ($save_in_dir) {
+        foreach ($blocks as $key => $block_path) {
+            $blocks[$key] = get_data_from_dir($block_path['dir']);
+        }
+    }
 
     if ($blocks == null) {
-        $blocks = $field_attributes['allowed_blocks'] ?? [];
+        $blocks = $field_attributes['preset'] ?? ($field_attributes['allowed_blocks'] ?? []);
     }
 
     $allow = array(
@@ -171,13 +197,12 @@ function render_block($blocks, $field_attributes, $block_group_name = null)
 
 ?>
     <input type="hidden" class="render-helper" name="allow" value="<?php echo htmlspecialchars(json_encode($allow)); ?>">
-    <input type="hidden" class="render-helper" name="header_tag" value="<?php echo ($header_tag); ?>">
 
     <div class="blocks">
         <?php
         foreach ($blocks as $id => $block) :
 
-            render_block_field($id, $block, $block_group_name, $allow, $expanded, $header_tag);
+            render_block_field($id, $block, $block_group_name, $allow);
 
         endforeach;
         ?>
@@ -186,8 +211,10 @@ function render_block($blocks, $field_attributes, $block_group_name = null)
 
     // Show add button to add new blocks
     if ($allow['add']) {
+
+        $class = (!$has_parent) ? 'top-level' : '';
     ?>
-        <div class="d-flex align-items-center add-new">
+        <div class="d-flex align-items-center add-new <?php echo $class; ?>">
             <button class="btn-add-block btn icon-btn" type="button" title="Add new block">
                 <span class="icon bi-plus-lg"></span>
                 <span class="text">Add new</span>
@@ -198,8 +225,22 @@ function render_block($blocks, $field_attributes, $block_group_name = null)
     }
 }
 
-function render_block_field($block_id, $block, $block_group_name, $allow = [], $expanded = false, $header_tag = 'h3')
+function render_single_block($block, $field_attributes, $block_group_name = null)
 {
+    $block_id = $field_attributes['block_id'];
+
+    $allow = array(
+        'add' => false,
+        'remove' => false,
+        'reorder' => false,
+    );
+
+    render_block_field($block_id, $block, $block_group_name, $allow, false, true);
+}
+
+function render_block_field($block_id, $block, $block_group_name, $allow = [], $expanded = false, $is_single  = false)
+{
+
     $explode_id = explode(':', $block_id);
     $block_id = $explode_id[0];
 
@@ -214,24 +255,39 @@ function render_block_field($block_id, $block, $block_group_name, $allow = [], $
 
     $block_model = get_block_model($block_id);
 
-    if (isset($block_model['expanded']))
-        $expanded = $block_model['expanded'];
+    // Set expanded if set in block model
+    $expanded = isset($block_model['expanded'])
+        ? $block_model['expanded']
+        : false;
 
-    $accordion_id = $block_id . random_int(0, 99);
+    // Set header_tag according to expanded
+    $header_tag = ($expanded) ? 'h3' : 'h4';
 
+    // Create accordion id
+    $accordion_id = $block_id . random_int(0, 99) . random_int(0, 99);
+
+    // Get field as title
     $field_as_title = $block_model['field_as_title'] ?? '';
 
     $accordion_title = ($field_as_title && is_array($block) && $block[$field_as_title])
         ? $block[$field_as_title]
         : $block_model['title'];
 
-    $block_field_name = ($block_group_name)
-        ? $block_group_name . '[' . $block_id . $index . ']'
-        : $block_group_name;
+    if ($is_single) {
+        $block_field_name = ($block_group_name)
+            ? $block_group_name
+            : $block_id;
+    } else {
+        $block_field_name = ($block_group_name)
+            ? $block_group_name . '[' . $block_id . $index . ']'
+            : $block_group_name;
+    }
 
 
     ?>
-    <fieldset class="block-field accordion-item" name="<?php echo $block_field_name; ?>" data-field-as-title="<?php echo $field_as_title; ?>">
+
+    <fieldset class="block-field accordion-item" name="<?php echo $block_field_name; ?>" data-field-as-title="<?php echo $field_as_title; ?>" data-block-id="<?php echo $block_id; ?>">
+
         <<?php echo $header_tag; ?> class="block-title accordion-header" id="heading_<?php echo $accordion_id; ?>">
             <button class="btn-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<?php echo $accordion_id; ?>" aria-expanded="true" aria-controls="collapse_<?php echo $accordion_id; ?>">
                 <span class="icon bi-<?php echo $block_model['icon']; ?>"></span>
@@ -240,7 +296,6 @@ function render_block_field($block_id, $block, $block_group_name, $allow = [], $
                 </span>
             </button>
         </<?php echo $header_tag; ?>>
-
 
         <div id="collapse_<?php echo $accordion_id; ?>" class="accordion-collapse collapse <?php if ($expanded) echo 'show'; ?>" aria-labelledby="heading_<?php echo $accordion_id; ?>">
 
@@ -273,71 +328,4 @@ function render_block_field($block_id, $block, $block_group_name, $allow = [], $
         </div>
     </fieldset>
 <?php
-}
-
-function render_single_block($block, $field, $block_group_name = null)
-{
-    $expanded = false;
-    $header_tag = ($expanded) ? 'h3' : 'h4';
-
-    $block_id = $field['block_id'];
-
-    $block_model = get_block_model($block_id);
-
-    if (isset($block_model['expanded']))
-        $expanded = $block_model['expanded'];
-
-    $accordion_id = $block_id . random_int(0, 99);
-
-    $accordion_title = $block_model['title'];
-
-    $block_field_name = ($block_group_name)
-        ? $block_group_name
-        : $block_id;
-
-?>
-    <fieldset class="block-field accordion-item" name="<?php echo $block_field_name; ?>">
-        <<?php echo $header_tag; ?> class="block-title accordion-header" id="heading_<?php echo $accordion_id; ?>">
-            <button class="btn-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<?php echo $accordion_id; ?>" aria-expanded="true" aria-controls="collapse_<?php echo $accordion_id; ?>">
-                <span class="icon bi-<?php echo $block_model['icon']; ?>"></span>
-                <span class="text">
-                    <?php echo $accordion_title; ?>
-                </span>
-            </button>
-        </<?php echo $header_tag; ?>>
-
-
-        <div id="collapse_<?php echo $accordion_id; ?>" class="accordion-collapse collapse <?php if ($expanded) echo 'show'; ?>" aria-labelledby="heading_<?php echo $accordion_id; ?>">
-
-            <div class="accordion-body">
-                <?php foreach ($block_model['attributes'] as $key => $field) :
-
-                    $value = $block[$key] ?? null;
-
-                    render_field($key, $field, $value, $block_field_name);
-
-                endforeach; ?>
-            </div>
-        </div>
-    </fieldset>
-<?php
-
-}
-
-function render_single_block_field($block_id, $block, $block_group_name, $allow = [], $expanded = false, $header_tag = 'h3')
-{
-}
-
-
-function get_block_model($id)
-{
-    // Get contents
-    $block_json = file_get_contents(MODEL_PATH . "/blocks/$id.json");
-
-    if (!$block_json) return null;
-
-    // Decode JSON as associative array
-    $block = json_decode($block_json, true);
-
-    return $block;
 }

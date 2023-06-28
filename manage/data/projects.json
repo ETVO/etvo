@@ -1,1 +1,14 @@
-{"form_action":"POST","data_source":"projects","projects":{"project":{"title":"Voleibol Competencias","link":"","description":"","tech":""}},"has_image":["projects[project][images]"]}
+{
+    "projects": {
+        "project": {
+            "dir": "C:\\laragon\\www\\etvo\\manage\/data\/projects\/project.json",
+            "uri": "\/manage\/data\/projects\/project.json",
+            "slug": "project"
+        },
+        "project:1": {
+            "dir": "C:\\laragon\\www\\etvo\\manage\/data\/projects\/project_1.json",
+            "uri": "\/manage\/data\/projects\/project_1.json",
+            "slug": "project_1"
+        }
+    }
+}

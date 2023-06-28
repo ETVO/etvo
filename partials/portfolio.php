@@ -3,11 +3,6 @@
 $projects_json = file_get_contents(__DIR__ . '/../manage/data/projects.json');
 $projects = json_decode($projects_json);
 
-// Sort newer to older
-// usort($projects, function ($a, $b) {
-//     return $b->year - $a->year;
-// });
-
 
 $portfolio = $blocks['portfolio'];
 ?>
@@ -23,20 +18,26 @@ $portfolio = $blocks['portfolio'];
                 <?php echo $portfolio['desc']; ?>
             </p>
         </div>
-        <!-- <div class="projects">
+        <div class="projects">
             <div class="row row-cols-2">
-                <?php foreach ($projects as $project) : ?>
+                <?php foreach ($projects as $project) : 
+                    $slug = str_replace(' ', '-', $project['title']);
+                    $title = $project['title'];
+                    $year = $project['year'];
+                    $images = $project['images'] ?? null;
+
+                    ?>
                     <div class="col">
-                        <div class="project" data-project-slug="<?php echo $project->slug; ?>" data-project-year="<?php echo $project->year; ?>">
-                            <img class="thumbnail" src="/assets/img/projects/<?php echo $project->slug; ?>/thumbnail.webp" alt="">
+                        <div class="project" data-project-slug="<?php echo $slug; ?>" data-project-year="<?php echo $year; ?>">
+                            <img class="thumbnail" src="<?php echo $src; ?>" alt="">
                             <div class="overlay">
                                 <div class="inner">
                                     <h3 class="title fs-4">
-                                        <?php echo $project->name; ?>
+                                        <?php echo $title; ?>
                                     </h3>
 
                                     <div class="year">
-                                        <?php echo $project->year; ?>
+                                        <?php echo $year; ?>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +45,7 @@ $portfolio = $blocks['portfolio'];
                     </div>
                 <?php endforeach; ?>
             </div>
-        </div> -->
+        </div>
 
         <div class="action">
             <?php if ($portfolio['final_action']) :

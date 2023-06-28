@@ -7,12 +7,14 @@ import './image_upload.js';
         $('form').on('submit', function (e) {
             e.preventDefault();
             $('input.render-helper').attr('disabled', true);
+            $('.image-upload').each(function () {
+            });
             this.submit();
         })
 
         $(document).on('click', '.btn-add-block', function () {
-            $parent_field = $(this).parents('.field').eq(0);
-            $blocks_div = $(this).parent('.add-new').siblings('.blocks');
+            const $blocks_div = $(this).parent('.add-new').siblings('.blocks');
+            const $parent_field = $blocks_div.parent('.field');
 
             let index = $blocks_div.children().length;
             let block_id = '';
@@ -20,7 +22,6 @@ import './image_upload.js';
             const block_group_name = $parent_field.find('input[name="block_group_name"]').val();
             const allow = JSON.parse($parent_field.find('input[name="allow"]').val());
             const expanded = true; // start expanded by default 
-            const header_tag = $parent_field.find('input[name="header_tag"]').val();
 
             let allAllowed = false;
             if (allowed_blocks.length == 0) {
@@ -67,8 +68,7 @@ import './image_upload.js';
                         null,
                         block_group_name,
                         allow,
-                        expanded,
-                        header_tag
+                        expanded
                     ])
                 },
                 dataType: "html",
@@ -83,7 +83,7 @@ import './image_upload.js';
 
 
         $(document).on('click', '.btn-remove-block', function () {
-            $block_field = $(this).parents('.block-field').eq(0);
+            const $block_field = $(this).parents('.block-field').eq(0);
 
             if (confirm('Are you sure you want to remove this block and lose all its content?')) {
                 $block_field.fadeOut(500, function () {
@@ -101,11 +101,11 @@ import './image_upload.js';
         });
 
         function move(block, direction) {
-            $block_field = $(block).parents('.block-field').eq(0);
-            $blocks_div = $block_field.parent('.blocks');
+            const $block_field = $(block).parents('.block-field').eq(0);
+            const $blocks_div = $block_field.parent('.blocks');
 
             var name = $block_field.attr('name').split('][');
-            index = name[name.length - 2];
+            var index = name[name.length - 2];
 
 
             if (direction == 1) {
@@ -136,21 +136,25 @@ import './image_upload.js';
         function trackFieldAsTitle(blockField) {
             const field_as_title = $(blockField).data('field-as-title');
             if (field_as_title == '') return;
-
             const blockName = $(blockField).attr('name');
 
             var fieldName = blockName + '[' + field_as_title + ']';
-
-            var blockTitle = $(blockField).find('#blockTitle');
+            
             $(blockField).find('[name="' + fieldName + '"').on('keyup change', function () {
-                console.log($(this).val());
-                if ($(this).val() != '') {
-                    blockTitle.text($(this).val());
-                }
-                else {
-                    blockTitle.text(blockTitle.data('og-title'));
-                }
+                updateBlockFieldTitle(blockField, $(this).val());
             });
+        }
+
+        function updateBlockFieldTitle(blockField, value = null) {
+            const block_id = $(blockField).data('block-id');
+            var blockTitle = $(blockField).find('#blockTitle').eq(0);
+
+            if (block_id != 'image' && value != null) {
+                blockTitle.text(value);
+            }
+            else {
+                blockTitle.text(blockTitle.data('og-title'));
+            }
         }
 
     }
