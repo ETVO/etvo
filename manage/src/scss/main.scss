@@ -7,10 +7,12 @@
 @import "./partials/main-container.scss";
 @import "./partials/content.scss";
 @import "./partials/forms.scss";
+@import "./partials/login.scss";
 
 html {
     scroll-behavior: smooth;
     overflow: visible;
+    overflow-y: scroll;
 }
 
 body {

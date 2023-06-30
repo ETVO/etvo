@@ -15,7 +15,6 @@ $data = get_data($data_source);
         <h1 class="title">Projects</h1>
         <p class="desc">Edit the projects in your Portfolio.</p>
     </div>
-    <!-- <button class="btn btn-primary">Add a block</button> -->
 
     <form action="./save.php" method="POST" class="model row w-100 m-0" enctype="multipart/form-data">
         <input type="hidden" name="form_action" value="POST">

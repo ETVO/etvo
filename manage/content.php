@@ -28,7 +28,6 @@ if (isset($_POST['form_action'])) {
         <h1 class="title">Content</h1>
         <p class="desc">Edit the content of your main page.</p>
     </div>
-    <!-- <button class="btn btn-primary">Add a block</button> -->
 
     <?php if ($edit_blocks) :
         $blocks = get_available_blocks();

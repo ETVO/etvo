@@ -1,7 +1,7 @@
 <?php
 include 'util.php';
 
-$site_title = $settings['site_title'];
+$site_title = $settings['site_title'] ?? '';
 
 if (!isset($active_menu))
     $active_menu = 0;
@@ -9,6 +9,7 @@ if (!isset($active_menu))
 $menu_options = array(
     'content' => "Content",
     'projects' => "Projects",
+    'users' => "Users",
 );
 ?>
 

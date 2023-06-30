@@ -3,22 +3,19 @@ header {
         background-color: var(--bs-primary);
         .navbar-brand {
             font-weight: bold;
-            font-family: "Lora", serif;
             color: white !important;
             font-size: 1.5rem;
-
+            
             span.etvo {
+                font-family: "Lora", serif;
                 font-weight: 600;
-                i {
-                    // font-size: 0.75em;
-                }
             }
 
             span.site-title {
-                font-style: italic;
-                font-size: .7em;
+                font-size: .6em;
                 font-weight: 300;
                 margin-left: .25rem;
+                letter-spacing: 2px;
             }
 
             &:hover,

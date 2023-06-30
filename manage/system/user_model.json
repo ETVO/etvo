@@ -1,0 +1,14 @@
+{
+    "name": {
+        "label": "Name",
+        "type": "string"
+    },
+    "username": {
+        "label": "Username",
+        "type": "string"
+    },
+    "password": {
+        "label": "Password",
+        "type": "password"
+    }
+}

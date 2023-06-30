@@ -89,6 +89,12 @@ function render_field($field_name, $field, $value, $parent_block = null, $echo =
             <?php
                 break;
 
+            case 'password':
+        ?>
+                <input type="password" class="form-control" id="<?php echo $name ?>" name="<?php echo $name; ?>" value="<?php echo $value; ?>">
+            <?php
+                break;
+
             case 'rich':
             ?>
                 <div class="rich-editor form-control"><?php echo $value; ?></div>
