@@ -1,20 +1,23 @@
 import 'bootstrap';
 import 'fslightbox';
 import './contact.js';
+import './blog.js';
 
 (jQuery)(
     function ($) {
         $('[data-bs-toggle="tooltip"]').tooltip();
 
-        $(window).scroll(function () {
-            var header = $('#header'),
-                scroll = $(window).scrollTop();
-
-            if (scroll >= 30) {
-                header.addClass('fixed');
-            }
-            else header.removeClass('fixed');
-        });
+        if(enableStickyHeader) {
+            $(window).scroll(function () {
+                var header = $('#header'),
+                    scroll = $(window).scrollTop();
+    
+                if (scroll >= 30) {
+                    header.addClass('fixed');
+                }
+                else header.removeClass('fixed');
+            });
+        }
 
         $('.project').on('click', function () {
             var path = $(this).data('project-path');
@@ -25,15 +28,15 @@ import './contact.js';
 
                 var images = (() => {
                     let images = [];
-                    let imageKeys =Object.keys(info.images);
+                    let imageKeys = Object.keys(info.images);
                     imageKeys.forEach((key) => {
                         var image = info.images[key];
-                        var src = image.src;    
+                        var src = image.src;
                         var style = image.style ?? '';
-    
+
                         images.push(`<img src="${src}" style="${style}" />`);
-                    }) 
-                    
+                    })
+
                     return images;
                 })();
 
@@ -57,6 +60,9 @@ import './contact.js';
         $('#projectModal').on('click', function (e) {
             if (e.target.id == 'projectModal')
                 $('#projectModal').fadeOut(200);
+        });
+        $('#projectModal .action').on('click', function (e) {
+            $('#projectModal').fadeOut(200);
         });
     }
 )

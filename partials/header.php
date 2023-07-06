@@ -1,6 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+
+$href = '';
+
+$currentpage = $_SERVER['REQUEST_URI'];
+if (!($currentpage == "/" || $currentpage == "/index.php" || $currentpage == "/index" || $currentpage == "")) {
+    $href = '/';
+}
+
+$logo_link = $href . '#';
+
+$menu_options = array(
+    array(
+        'name' => 'Services',
+        'link' => $href . '#services'
+    ),
+    array(
+        'name' => 'Contact',
+        'link' => $href . '#contact'
+    ),
+    array(
+        'name' => 'Portfolio',
+        'link' => $href . '#portfolio'
+    ),
+    array(
+        'name' => 'Blog',
+        'link' => '/blog/'
+    ),
+);
+
+if (!isset($page_title))
+    $page_title = 'ETVO';
+
+
+// $privacidade_link = '/politica-privacidade.php';
+
+// $GA_TRACKING_ID = 'G-JXHF9X3TYJ';
+
+?>
+
 <head>
     <!-- Start of HubSpot Embed Code -->
     <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/139517787.js"></script>
@@ -10,7 +50,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php echo $page_title ?? 'ETVO'; ?></title>
+    <title><?php echo $page_title; ?></title>
 
     <link rel="shortcut icon" href="/assets/img/favicon.svg" type="image/x-icon">
 
@@ -30,7 +70,7 @@
     <header id="header">
         <nav class="navbar navbar-expand-md">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="<?php echo $logo_link; ?>">
                     <img src="/assets/img/etvo-desc.svg" alt="etvo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,15 +78,14 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#services">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#portfolio">Portfolio</a>
-                        </li>
+                        <?php foreach ($menu_options as $option) :
+                            $link = $option['link'];
+                            $name = $option['name'];
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo $link; ?>"><?php echo $name; ?></a>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>

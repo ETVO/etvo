@@ -1,0 +1,169 @@
+.blog {
+    padding: 2rem 0;
+    background-color: #f0f0f0;
+    .categories {
+        margin: 1rem 0;
+        display: inline-flex;
+        .category {
+            font-family: "Lora", sans-serif;
+
+            border: solid 1px #444;
+            
+            font-weight: 500;
+            font-size: 0.9rem;
+
+            padding: 0.5rem 0.75rem;
+            margin-right: 1rem;
+            cursor: pointer;
+
+            transition: background 0.2s;
+
+            &.selected {
+                background-color: #444;
+                color: white;
+            }
+
+            input {
+                visibility: hidden;
+                position: absolute;
+            }
+        }
+
+        .clear-filters {
+            display: flex;
+            span {
+                font-size: 1.1rem;
+                margin: auto;
+            }
+        }
+    }
+
+    .search-wrap {
+        display: flex;
+
+        #searchBar {
+            margin: auto 0 auto auto;
+            display: flex;
+            width: 300px;
+            
+            input {
+                font-family: "Lora", sans-serif;
+                font-size: 0.9rem;
+                padding: 0.65rem .75rem;
+                font-weight: 500;
+            }
+            span {  
+                color: #777;
+                cursor: pointer;
+                margin: auto;
+                margin-left: -1.75rem;
+            }
+        }
+    }
+    .posts-wrap {
+        position: relative;
+        .loading-overlay {
+            display: none;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(#f0f0f0, 0.5);
+            .inner {
+                width: 100%;
+                height: 100%;
+                display: flex;
+            }
+            span {
+                margin: auto;
+                color: black;
+                font-size: 1.5rem;
+            }
+        }
+        .post {
+            display: flex;
+            align-items: stretch;
+
+            margin: 1rem 0;
+            background-color: #fff;
+            border-radius: 1rem;
+
+            .image {
+                margin-right: 1.5rem;
+
+                &:has(img) .placeholder-img {
+                    display: none;
+                }
+
+                .placeholder-img,
+                img {
+                    width: 300px;
+                    height: 100%;
+                    border-radius: 1rem 0 0 1rem;
+
+                    transition: transform 0.2s;
+                }
+                .placeholder-img {
+                    background-color: #d9d9d9;
+                    display: flex;
+                    span {
+                        font-size: 3rem;
+                        margin: auto;
+                        color: #999;
+                    }
+                }
+                img {
+                    object-fit: cover;
+                }
+            }
+
+            .content {
+                position: relative;
+                width: 100%;
+                padding: 2rem 1rem;
+
+                .meta {
+                    position: absolute;
+                    right: 0.5rem;
+                    top: 0.5rem;
+                    padding: 0.5rem 1rem;
+                    background-color: #f0f0f0;
+                    border-radius: 1rem;
+
+                    display: flex;
+                    font-size: 0.8rem;
+                    color: #000;
+                    font-weight: 300;
+                    letter-spacing: 0.4px;
+
+                    .separator {
+                        margin: 0 0.25rem;
+                    }
+                    .post-categories {
+                        font-family: "Lora", sans-serif;
+                        font-weight: 500;
+                        line-height: 1;
+                    }
+                }
+
+                .title {
+                    width: 600px;
+                    max-width: 100%;
+                }
+
+                .action a {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+
+    .load-more {
+        margin-top: 1rem;
+        .message {
+            font-weight: 300;
+            font-size: 0.9rem;
+            letter-spacing: 0.4px;
+        }
+    }
+}

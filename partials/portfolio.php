@@ -3,7 +3,13 @@
 $projects_json = file_get_contents(__DIR__ . '/../manage/data/projects.json');
 $projects = json_decode($projects_json, true);
 
+
 usort($projects['projects'], function ($a, $b) {
+    return strcmp($a["title"], $b["title"]);
+});
+
+usort($projects['projects'], function ($a, $b) {
+    if ($a['year'] == '' || $b['year'] == '') return 1;
     return $b['year'] - $a['year'];
 });
 
@@ -22,13 +28,13 @@ $portfolio = $blocks['portfolio'];
             </p>
         </div>
         <div class="projects">
-            <div class="row row-cols-2">
-                <?php foreach ($projects['projects'] as $project):
-
+            <div class="row row-cols-1 row-cols-lg-2 g-4">
+                <?php foreach ($projects['projects'] as $project) :
                     $path = $project['filepath']['uri'];
                     $title = $project['title'];
                     $year = $project['year'];
                     $thumbnail_src = $project['thumbnail'];
+                    if (!$title) continue;
 
                 ?>
                     <div class="col">
@@ -82,7 +88,7 @@ $portfolio = $blocks['portfolio'];
 
             <div class="action">
                 <div class="caption">Did you get inspired?</div>
-                <a href="" class="btn btn-primary">start your project</a>
+                <a href="#contact" class="btn btn-primary">start your project</a>
             </div>
         </div>
     </div>

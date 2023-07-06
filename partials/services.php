@@ -30,6 +30,7 @@ $default_services = array(
 $services = $blocks['services'];
 ?>
 <section class="services">
+    <div class="inner-shadow"></div>
     <a class="anchor" id="services"></a>
     <div class="container">
         <div class="content">

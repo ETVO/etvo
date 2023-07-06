@@ -1,0 +1,175 @@
+.single .content {
+    a {
+        color: #6926ed;
+    }
+
+    mark {
+        background-color: mix(white, #26EDCC, 50%);
+        color: black;
+        padding: .1rem;
+    }
+
+    .wp-block-image {
+        margin: 1.5rem 0;
+
+        & .aligncenter,
+        & .alignleft,
+        & .alignright,
+        &.aligncenter,
+        &.alignleft,
+        &.alignright {
+            display: table;
+        }
+
+        &.aligncenter {
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        &.alignleft {
+            float: left;
+            padding-right: 1.5rem;
+        }
+
+        &.alignright {
+            float: right;
+            padding-left: 1.5rem;
+        }
+
+        figcaption {
+            margin: 0.5rem 0;
+            letter-spacing: 0.4px;
+            font-size: 0.85rem;
+            text-align: center;
+            caption-side: bottom;
+            display: table-caption;
+        }
+    }
+
+    table,
+    .wp-block-table {
+        border-collapse: collapse;
+        width: 100%;
+
+        td,
+        th {
+            border-color: inherit;
+            border-width: 1px;
+            border-style: solid;
+            word-break: normal;
+            padding: 0.5rem;
+        }
+    }
+
+    blockquote,
+    .wp-block-quote {
+        border-left: 0.25rem solid;
+        margin: 1.5rem 0;
+        padding-left: 1rem;
+
+        cite {
+            font-style: normal;
+            font-size: 0.85rem;
+        }
+    }
+
+    .wp-block-pullquote {
+        border-bottom: 0.25rem solid;
+        border-top: 0.25rem solid;
+        margin: 1.5rem 0;
+        padding: 3rem 1rem;
+        text-align: center;
+
+        blockquote {
+            border-left: none;
+            padding-left: 0;
+            margin: 0;
+
+            cite {
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .wp-block-code {
+        border: solid 1px #ccc;
+        border-radius: 0.25rem;
+        padding: 0.8rem 1rem;
+        font-family: Menlo, Consolas, monaco, monospace;
+    }
+
+    .wp-block-gallery {
+        display: flex;
+        // justify-content: center;
+        // align-items: center;
+
+        &.columns-1 {
+            flex-flow: column;
+            .wp-block-image {
+                width: 100%;
+            }
+        }
+        &.columns-2 {
+            .wp-block-image {
+                width: 50%;
+            }
+        }
+        &.columns-3 {
+            .wp-block-image {
+                width: 33%;
+            }
+        }
+        &.columns-4 {
+            .wp-block-image {
+                width: 25%;
+            }
+        }
+
+        .wp-block-image {
+            margin-right: 1rem;
+            &:last-child {
+                margin-right: 0;
+            }
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+
+    .wp-block-buttons {
+        margin: 1rem 0;
+        &.is-layout-flex {
+            display: flex;
+        }
+
+        .wp-block-button {
+            margin-right: 1rem;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            a {
+                display: inline-block;
+                padding: 0.5rem 1rem;
+
+                background: var(--bs-primary);
+                color: white;
+            }
+
+            &.is-style-outline a {
+                background: none;
+                border: solid 1px var(--bs-primary);
+                color: var(--bs-primary);
+            }
+        }
+    }
+
+    .wp-block-audio {
+        margin: 1rem 0;
+        audio {
+            width: 100%;
+        }
+    }
+}

@@ -151,11 +151,6 @@ function save_in_dir(&$data, $save_in_dir)
                 'slug' => $block_slug,
             );
 
-            echo "\n\nStaying in source file:\n";
-            print_r($block_data);
-            echo "\n\nGoing to new file:\n";
-            print_r($block);
-
             $json = json_encode($block);
 
             file_put_contents($block_filepath, $json);

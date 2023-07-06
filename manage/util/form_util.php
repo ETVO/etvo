@@ -76,7 +76,7 @@ function render_form_fields($fields)
 
             if (!$prev_in_row) :
 ?>
-                <div class="mb-3 row g-3">
+                <div class="mb-3 row g-3 row-cols-1 row-cols-md-2">
                 <?php
             endif;
                 ?>
@@ -105,10 +105,10 @@ function render_form_fields($fields)
     {
     ?>
     <label for="<?php echo $name; ?>"><?php echo $label; ?></label>
-    <?php if($type == 'textarea'): ?>
+    <?php if ($type == 'textarea') : ?>
         <textarea name="<?php echo $name; ?>" class="form-control" <?php echo $required; ?> <?= $attrs; ?>>
         </textarea>
-    <?php else: ?>
+    <?php else : ?>
         <input type="<?php echo $type; ?>" name="<?php echo $name; ?>" class="form-control" <?php echo $required; ?> <?= $attrs; ?>>
     <?php endif; ?>
     <div class="invalid-feedback"></div>

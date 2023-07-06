@@ -16,6 +16,7 @@
             top: -1.25rem;
             right: -2.5rem;
             z-index: -1;
+            height: 180px;
         }
 
         .pre-title {
@@ -25,7 +26,7 @@
         }
 
         .title {
-            font-size: calc(1.75rem + .6vw);
+            font-size: calc(1.75rem + 0.6vw);
             color: white;
         }
         .desc {
@@ -39,7 +40,8 @@
     }
 
     .projects {
-        padding: 2.25rem 0;
+        padding: 2.25rem 1rem;
+        margin: 0 -1rem;
         background: linear-gradient(transparent 0, #1e1e1e 2rem);
         z-index: 2;
 
@@ -53,13 +55,6 @@
                 box-shadow: 2px 2px 10px rgba(#000, 0.25);
                 .overlay {
                     opacity: 1;
-
-                    .inner {
-                        .title,
-                        .year {
-                            opacity: 1;
-                        }
-                    }
                 }
             }
 
@@ -82,7 +77,7 @@
                 color: white;
 
                 opacity: 0;
-                transition: opacity 0.1s;
+                transition: opacity 0.3s;
 
                 .inner {
                     margin: auto;
@@ -92,9 +87,6 @@
                         font-family: "Lora", serif;
                         color: inherit;
                         text-shadow: 1px 1px 3px rgba(#000, 0.5);
-
-                        opacity: 0;
-                        transition: opacity 0.4s ease;
                     }
 
                     .year {
@@ -102,9 +94,6 @@
                         letter-spacing: 1px;
                         font-weight: 300;
                         text-shadow: 1px 1px 3px rgba(#000, 0.5);
-
-                        opacity: 0;
-                        transition: opacity 0.6s ease;
                     }
                 }
             }
@@ -112,18 +101,62 @@
     }
 
     .action {
-
         .btn {
             color: white;
         }
 
         .caption {
-            margin-bottom: .75rem;
+            margin-bottom: 0.75rem;
 
             color: var(--bs-light);
             font-style: italic;
             font-family: "Lora", sans-serif;
             font-weight: 400;
+        }
+    }
+}
+
+@media all and (max-width: 992px) {
+    .portfolio {
+        .content {
+            position: unset;
+
+            .art {
+                top: 1rem;
+                right: -2rem;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 768px) {
+    .portfolio {
+        padding: calc(180px - 3rem) 0 3rem;
+        .content {
+            .art {
+                opacity: 0.4;
+                top: -2rem;
+            }
+        }
+
+        .projects .project {
+            .thumbnail {
+                height: 180px;
+            }
+            .overlay {
+                position: relative;
+                opacity: 1;
+                margin: 0.5rem 0 0;
+                .inner {
+                    .title {
+                        font-size: 0.9rem !important;
+                        font-weight: normal;
+                    }
+                    .year {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
         }
     }
 }

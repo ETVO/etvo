@@ -22,11 +22,13 @@
 
         right: 3rem;
         top: 1rem;
+        z-index: 3;
 
-        background-color: var(--bs-dark);
+        box-shadow: 2px 2px 10px rgba(#000, 1);
+        background-color: white;
+        color: black;
 
         border-radius: 50%;
-        box-shadow: 1px 1px 10px rgba(#000, 0.5);
 
         transition: background 0.1s;
 
@@ -37,7 +39,7 @@
         }
 
         &:hover {
-            background-color: mix(white, #1e1e1e, 10%);
+            background-color: mix(#1e1e1e, white, 20%);
         }
     }
 
@@ -155,5 +157,17 @@
                 font-weight: 400;
             }
         }
+    }
+}
+
+@media all and (max-width: 992px) {
+    .project-modal .close {
+        right: 1.5rem;
+    }
+}
+
+@media all and (max-width: 576px) {
+    .project-modal .content .art {
+        opacity: .4;
     }
 }

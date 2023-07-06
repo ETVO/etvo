@@ -32,7 +32,7 @@
             "label": "Gallery",
             "type": "blocks",
             "allowed_blocks": [
-                "image"
+                "image_portfolio"
             ],
             "allow": {
                 "add": true,

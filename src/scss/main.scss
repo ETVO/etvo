@@ -34,11 +34,6 @@ a {
     color: white;
 }
 
-mark {
-    background-color: var(--bs-primary) !important;
-    padding: 0.1rem 0 !important;
-}
-
 form {
     label {
         cursor: pointer;
@@ -86,3 +81,22 @@ a.anchor {
     opacity: 0.75;
 }
 
+.error {
+    background-color: #fafafa;
+    .title {
+        font-size: 7rem;
+    }
+
+    .subtitle {
+        font-weight: 300;
+        font-size: 1.5rem;
+        letter-spacing: .4px;
+    }
+    
+    p {
+        margin: 1rem 0 1.5rem;
+        letter-spacing: .4px;
+        font-weight: 300;
+        text-align: center;
+    }
+}

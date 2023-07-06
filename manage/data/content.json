@@ -1,11 +1,11 @@
 {
     "page_title": "ETVO",
     "blocks": {
-        "hero": {
+        "hero:0": {
             "title": "Specialized in web design & development.",
             "desc": "Crafting efficient tools and memorable experiences."
         },
-        "services": {
+        "services:0": {
             "subtitle": "SERVICES",
             "title": "Offering services for projects that want be remembered.",
             "main_action": {
@@ -27,7 +27,7 @@
                 },
                 "service:1": {
                     "title": "Web Design",
-                    "icon": "brush",
+                    "icon": "activity",
                     "description": "Creating a prototype for a website, in its desktop and mobile versions, and designing the User Experience of the website.",
                     "is_for_me": "Useful resource for companies that are looking to use their website to sell, convert and grow authority.\r\n<br><b>Remarkable websites make remarkable companies.<\/b>"
                 },
@@ -45,17 +45,17 @@
                 }
             }
         },
-        "contact": {
+        "contact:0": {
             "subtitle": "START YOUR PROJECT",
             "title": "Make it happen.",
             "desc": "Put your idea in the real world with expertise and elegance.\r\n<br><b>Make it fast, make it yours, make it happen.<\/b>"
         },
-        "money": {
+        "money:0": {
             "subtitle": "MONEY TALKS",
             "title": "<span>Fair pricing,<\/span><br><span>fair job<\/span>",
             "desc": "<b>Only you can know how much you are willing and able to invest in a website, rebranding or design project.<\/b> <br>Let\u2019s find a solution that fits your range, with the guarantee of a well-done job. In any craft, ultimately it is not the payment that matters most, but the work itself."
         },
-        "portfolio": {
+        "portfolio:0": {
             "subtitle": "PORTFOLIO",
             "title": "Take a look at what has been done.",
             "desc": "Professional, tailor-made, custom-built house for a company, in the web.",
