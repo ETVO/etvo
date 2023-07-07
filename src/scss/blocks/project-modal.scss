@@ -4,6 +4,8 @@
     inset: 0;
     z-index: 999;
 
+    cursor: pointer;
+    
     background: rgba(#1e1e1e, 0.5);
 
     color: white;
@@ -44,6 +46,7 @@
     }
 
     .content {
+        cursor: auto;
         position: relative;
         width: 992px;
         padding: 4rem 0;

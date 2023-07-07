@@ -2,14 +2,16 @@
     function ($) {
         const postsDiv = $('#posts');
         const selectedCategory = $('#selectedCategory');
-        const categories = $('.categories');
+        const categories = $('.categories-filter');
         const filterCategory = $('input[name="filter-category"]');
         const postsPerPage = $('#postsPerPage');
         const page = $('#page');
+        const searchMsg = $('#searchMsg');
         const noMoreMsg = $('#noMoreMsg');
         const notFoundMsg = $('#notFoundMsg');
         const loadMoreBtn = $('#loadMoreBtn');
         const loading = $('#loading');
+        const clearFilters = $('#clearFilters');
         const searchInput = $('#searchInput');
 
         const UTIL_URL = '/manage/util/';
@@ -29,7 +31,14 @@
             }
 
             loadPosts(true);
-            console.log('selected', selectedCategory.val());
+        });
+
+        
+        $(clearFilters).click(function () {
+            selectedCategory.val(0);
+            categories.find('.category').removeClass('selected');
+            searchInput.val('');
+            loadPosts(true);
         });
 
 
@@ -50,7 +59,7 @@
             var newPage = parseInt(page.val());
             var searchTerms = searchInput.val();
 
-            if (empty || searchTerms)
+            if (empty)
                 newPage = 1;
             else
                 newPage++;
@@ -59,6 +68,12 @@
             noMoreMsg.hide();
             notFoundMsg.hide();
             loadMoreBtn.show();
+            
+            searchMsg.hide();
+            if(searchTerms) {
+                searchMsg.find('b').text(searchTerms);
+                searchMsg.show();
+            }
 
             $.ajax({
                 url: UTIL_URL + 'use_blog_util.php',

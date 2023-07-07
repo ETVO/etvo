@@ -5,8 +5,7 @@ include './manage/util/blog_util.php';
 if (isset($category_slug)) {
     $category = get_category_by_slug($category_slug);
     $selected_category = $category['id'] ?? null;
-}
-else {
+} else {
     $selected_category = null;
 }
 
@@ -36,12 +35,12 @@ include './partials/header.php';
         </h1>
 
         <div class="row row-cols-1 row-cols-lg-2">
-            <div class="categories col">
+            <div class="categories-filter col">
                 <?php
-    
+
                 $categories = get_categories();
                 if (!$categories) $categories = [];
-    
+
                 foreach ($categories as $category) :
                     $name = $category['name'];
                     $category_id = $category['id'];
@@ -50,7 +49,7 @@ include './partials/header.php';
                     $class = $selected
                         ? 'selected'
                         : '';
-    
+
                     $href = $selected
                         ? "?"
                         : "?category=$category_id";
@@ -62,11 +61,11 @@ include './partials/header.php';
                         <input type="radio" name="filter-category" value="<?php echo $category_id; ?>" <?php if ($selected)  echo 'checked'; ?>>
                     </label>
                 <?php endforeach; ?>
-                <label class="clear-filters">
+                <label class="clear-filters" id="clearFilters" title="Clear filters">
                     <span class="bi-arrow-clockwise"></span>
                 </label>
             </div>
-            
+
             <div class="search-wrap col">
                 <?php render_search(); ?>
             </div>
@@ -83,7 +82,13 @@ include './partials/header.php';
                     </div>
                 </div>
 
-                <div class="posts row row-cols-1" id="posts">
+                <div class="message-wrap">
+                    <span class="message" id="searchMsg" style="display: none;">
+                        Search results for <b></b>
+                    </span>
+                </div>
+
+                <div class="posts" id="posts">
 
                     <?php foreach ($posts as $post) :
 
@@ -104,38 +109,36 @@ include './partials/header.php';
 
                         $link = '/post/' . $post['slug'];
                     ?>
-                        <div class="col">
-                            <div class="post">
-                                <a class="image" href="<?php echo $link; ?>">
-                                    <?php if ($img_src) : ?>
-                                        <img src="<?php echo $img_src; ?>" alt="<?php echo $img_alt; ?>">
-                                    <?php else : ?>
-                                        <div class="placeholder-img"><span class="bi-image"></span></div>
-                                    <?php endif; ?>
+                        <div class="post">
+                            <a class="image" href="<?php echo $link; ?>">
+                                <?php if ($img_src) : ?>
+                                    <img src="<?php echo $img_src; ?>" alt="<?php echo $img_alt; ?>">
+                                <?php else : ?>
+                                    <div class="placeholder-img"><span class="bi-image"></span></div>
+                                <?php endif; ?>
+                            </a>
+                            <div class="content">
+                                <div class="meta">
+                                    <div class="post-categories">
+                                        <?php echo $categories; ?>
+                                    </div>
+                                    <?php if ($categories) echo '<div class="separator">&bull;</div>'; ?>
+                                    <div class="post-date">
+                                        <?php echo date('d/m/Y', strtotime($date)); ?>
+                                    </div>
+                                </div>
+                                <a href="<?php echo $link; ?>">
+                                    <h3 class="title">
+                                        <?php echo $title; ?>
+                                    </h3>
                                 </a>
-                                <div class="content">
-                                    <a href="<?php echo $link; ?>">
-                                        <h3 class="title">
-                                            <?php echo $title; ?>
-                                        </h3>
+                                <div class="excerpt">
+                                    <?php echo $excerpt; ?>
+                                </div>
+                                <div class="action">
+                                    <a href="<?php echo $link; ?>" class="btn btn-primary read-more">
+                                        read more
                                     </a>
-                                    <div class="meta">
-                                        <div class="post-categories">
-                                            <?php echo $categories; ?>
-                                        </div>
-                                        <?php if ($categories) echo '<div class="separator">&bull;</div>'; ?>
-                                        <div class="post-date">
-                                            <?php echo date('d/m/Y', strtotime($date)); ?>
-                                        </div>
-                                    </div>
-                                    <div class="excerpt">
-                                        <?php echo $excerpt; ?>
-                                    </div>
-                                    <div class="action">
-                                        <a href="<?php echo $link; ?>" class="btn btn-primary read-more">
-                                            read more
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -148,14 +151,14 @@ include './partials/header.php';
                         <div class="placeholder-img"><span class="bi-image"></span></div>
                     </a>
                     <div class="content">
-                        <a href="">
-                            <h3 class="title"></h3>
-                        </a>
                         <div class="meta">
                             <div class="post-categories"></div>
                             <div class="separator">&bull;</div>
                             <div class="post-date"></div>
                         </div>
+                        <a href="">
+                            <h3 class="title"></h3>
+                        </a>
                         <div class="excerpt"></div>
                         <div class="action">
                             <a class="btn btn-primary read-more">read more</a>
@@ -167,12 +170,14 @@ include './partials/header.php';
                 <div class="btn btn-secondary" id="loadMoreBtn">
                     Load more
                 </div>
-                <span class="message" id="noMoreMsg" style="display: none;">
-                    No more posts were found.
-                </span>
-                <span class="message" id="notFoundMsg" style="display: none;">
-                    No posts were found.
-                </span>
+                <div class="message-wrap">
+                    <span class="message" id="noMoreMsg" style="display: none;">
+                        No more posts were found.
+                    </span>
+                    <span class="message" id="notFoundMsg" style="display: none;">
+                        No posts were found.
+                    </span>
+                </div>
             </div>
         <?php
         else :
