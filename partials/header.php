@@ -50,7 +50,7 @@ if (!isset($page_title))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php echo $page_title; ?></title>
+    <?php include dirname(__FILE__) . '/meta-tags.php' ?>
 
     <link rel="shortcut icon" href="/assets/img/favicon.svg" type="image/x-icon">
 

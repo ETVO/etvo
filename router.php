@@ -6,7 +6,7 @@ $viewDir = '/';
 // Check if the request matches the format '/post/{slug}'
 if (preg_match('/^\/post\/([^\/]+)/', $request, $matches)) {
     $slug = $matches[1];
-    if(count(explode('/', $request)) > 3) {
+    if (count(explode('/', $request)) > 3) {
         header('Location: /post/' . $slug);
     }
     // Include single.php with the slug as a parameter
@@ -17,13 +17,14 @@ if (preg_match('/^\/post\/([^\/]+)/', $request, $matches)) {
 // Check if the request matches the format '/blog/{slug}'
 if (preg_match('/^\/blog\/([^\/]+)/', $request, $matches)) {
     $category_slug = $matches[1];
-    if(count(explode('/', $request)) > 3) {
+    if (count(explode('/', $request)) > 3) {
         header('Location: /blog/' . $slug);
     }
     // Include blog.php with the category slug as a parameter
     require __DIR__ . $viewDir . 'blog.php';
     exit;
 }
+
 
 switch ($request) {
     case '':

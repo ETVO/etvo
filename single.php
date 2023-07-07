@@ -12,6 +12,8 @@ $image = get_post_featured_image($post);
 
 $page_title = $title;
 
+$yoast = get_yoast_head($post);
+
 include './partials/header.php';
 
 ?>

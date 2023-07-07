@@ -21,6 +21,9 @@ $posts = fetch_posts(array(
     'per_page' => $posts_per_page
 ));
 
+$page_title = 'Blog ETVO';
+$page_url = SITE_URL . '/blog/';
+
 include './partials/header.php';
 
 ?>
