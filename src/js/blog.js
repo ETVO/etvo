@@ -51,7 +51,7 @@
         })
 
 
-        $(loadMoreBtn).click(() => { loadPosts(false); });
+        $(loadMoreBtn).click(() => { loadPosts(); });
 
         function loadPosts(empty = false) {
             var category = selectedCategory.val();
@@ -103,7 +103,7 @@
                         // Success
                         page.val(newPage);
                         var posts = response[1];
-                        showNewPosts(posts, empty);
+                        showNewPosts(posts);
                     }
                     else {
                         // No posts

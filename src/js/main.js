@@ -1,7 +1,6 @@
 import 'bootstrap';
 import 'fslightbox';
 import './contact.js';
-import './blog.js';
 
 (jQuery)(
     function ($) {

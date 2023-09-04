@@ -32,7 +32,8 @@ function make_api_request($endpoint, $data = null, $associative = true)
 // Fetch all posts
 function fetch_posts($args = null)
 {
-    return make_api_request('posts', $args);
+    $response = make_api_request('posts', $args);
+    return $response;
 }
 
 // Get post by slug

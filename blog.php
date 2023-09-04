@@ -14,11 +14,12 @@ if (isset($_GET['category']))
 
 $posts_per_page = 4;
 
-$posts = fetch_posts(array(
+$args = array(
     'context' => 'embed',
     'categories' => $selected_category,
     'per_page' => $posts_per_page
-));
+);
+$posts = fetch_posts($args);
 
 $page_title = 'Blog ETVO';
 $page_url = SITE_URL . '/blog/';

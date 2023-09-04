@@ -59,12 +59,11 @@
             }
 
             .thumbnail {
-                border-radius: 0.5rem;
                 height: 300px;
                 width: 100%;
                 object-fit: cover;
             }
-
+            
             .overlay {
                 display: flex;
                 position: absolute;

@@ -6,6 +6,7 @@ mix.disableSuccessNotifications();
 
 // Compile
 mix.js('src/js/main.js', 'js')
+.js('src/js/blog.js', 'js')
 .sass('src/scss/main.scss', 'css')
 .sass('src/scss/blog.scss', 'css')
 .sass('src/scss/bootstrap.scss', 'css')

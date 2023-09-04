@@ -1,6 +1,6 @@
 <?php
 
-$projects_json = file_get_contents(__DIR__ . '/../manage/data/projects.json');
+$projects_json = file_get_contents(MANAGE_URL . '/data/projects.json');
 $projects = json_decode($projects_json, true);
 
 

@@ -2,9 +2,9 @@
 
 $page_title = 'ETVO';
 
+include './config/etvo-manage.php';
 
-
-$content_json = file_get_contents('./manage/data/content.json');
+$content_json = file_get_contents(MANAGE_URL . '/data/content.json');
 $content = json_decode($content_json, true, 512, JSON_FORCE_OBJECT);
 
 $blocks = array();
