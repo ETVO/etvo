@@ -1,6 +1,6 @@
 <?php
 
-include './manage/util/blog_util.php';
+include CONTROL_DIR . '/blog_util.php';
 
 if (isset($category_slug)) {
     $category = get_category_by_slug($category_slug);

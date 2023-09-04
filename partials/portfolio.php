@@ -1,17 +1,37 @@
 <?php
 
-$projects_json = file_get_contents(MANAGE_URL . '/data/projects.json');
-$projects = json_decode($projects_json, true);
+$projects = get_data('projects');
 
 
-usort($projects['projects'], function ($a, $b) {
-    return strcmp($a["title"], $b["title"]);
+// usort($projects['projects'], function ($a, $b) {
+//     return strcmp($a["title"], $b["title"]);
+// });
+
+// usort($projects['projects'], function ($a, $b) {
+//     if ($a['menu_order'] == 0 && $b['menu_order'] == 0) return 1;
+//     return $b['menu_order'] +    $a['menu_order'];
+// });
+
+// usort($projects['projects'], function ($a, $b) {
+//     if ($a['year'] == '' || $b['year'] == '') return 1;
+//     return $b['year'] - $a['year'];
+// });
+
+usort($projects['projects'], function($a, $b) {
+    // Compare by year (descending)
+    if ($b['year'] != $a['year']) {
+        return $b['year'] - $a['year'];
+    }
+
+    // Compare by menu_order (ascending)
+    if ($a['menu_order'] != $b['menu_order']) {
+        return $a['menu_order'] - $b['menu_order'];
+    }
+
+    // Compare by title (a to z)
+    return strcmp($a['title'], $b['title']);
 });
 
-usort($projects['projects'], function ($a, $b) {
-    if ($a['year'] == '' || $b['year'] == '') return 1;
-    return $b['year'] - $a['year'];
-});
 
 $portfolio = $blocks['portfolio'];
 ?>
@@ -30,7 +50,7 @@ $portfolio = $blocks['portfolio'];
         <div class="projects">
             <div class="row row-cols-1 row-cols-lg-2 g-4">
                 <?php foreach ($projects['projects'] as $project) :
-                    $path = $project['filepath']['uri'];
+                    $dir = $project['filepath']['dir'];
                     $title = $project['title'];
                     $year = $project['year'];
                     $thumbnail_src = $project['thumbnail'];
@@ -38,7 +58,7 @@ $portfolio = $blocks['portfolio'];
 
                 ?>
                     <div class="col">
-                        <div class="project" data-project-path="<?php echo $path; ?>" data-project-year="<?php echo $year; ?>">
+                        <div class="project" data-project-dir="<?php echo $dir; ?>" data-project-year="<?php echo $year; ?>">
                             <img class="thumbnail" src="<?php echo $thumbnail_src; ?>" alt="">
                             <div class="overlay">
                                 <div class="inner">

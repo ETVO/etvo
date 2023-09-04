@@ -25,10 +25,10 @@ $menu_options = array(
         'name' => 'Portfolio',
         'link' => $href . '#portfolio'
     ),
-    array(
-        'name' => 'Blog',
-        'link' => '/blog/'
-    ),
+    // array(
+    //     'name' => 'Blog',
+    //     'link' => '/blog/'
+    // ),
 );
 
 if (!isset($page_title))

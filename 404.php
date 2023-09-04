@@ -12,7 +12,7 @@ include './partials/header.php';
             <div class="title">404</div>
             <div class="subtitle">Page Not Found</div>
         </h1>
-        <p>We couldn't find what you were looking for 😓</p>
+        <p>We couldn't find what you were looking for :(</p>
         <a href="/" class="btn btn-primary">return to home</a>
     </div>
 </div>

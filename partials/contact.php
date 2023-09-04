@@ -1,11 +1,11 @@
 <?php
 
-include './manage/util/form_util.php';
+include CONTROL_DIR . '/form_util.php';
 
-$contact_model_json = file_get_contents('./manage/model/contact.json');
-$contact_model = json_decode($contact_model_json, true, 512, JSON_FORCE_OBJECT);
 
 $contact = $blocks['contact'];
+
+$contact_model = get_model('contact');
 
 $form_status = isset($_GET['form_status'])
     ? $_GET['form_status']
