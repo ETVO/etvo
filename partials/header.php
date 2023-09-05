@@ -30,6 +30,21 @@ $menu_options = array(
     //     'link' => '/blog/'
     // ),
 );
+// href="https://github.com/ETVO" class="bi-github" title="GitHub" target="_blank"></a>
+// href="https://www.linkedin.com/in/estevaoprolim/" class="bi-linkedin"
+
+$socials = array(
+    array(
+        'title' => 'GitHub',
+        'link' => 'https://github.com/ETVO',
+        'icon' => 'github'
+    ),
+    array(
+        'title' => 'LinkedIn',
+        'link' => 'https://www.linkedin.com/in/estevaoprolim/',
+        'icon' => 'linkedin'
+    ),
+);
 
 if (!isset($page_title))
     $page_title = 'ETVO';
@@ -86,6 +101,11 @@ if (!isset($page_title))
                                 <a class="nav-link" href="<?php echo $link; ?>"><?php echo $name; ?></a>
                             </li>
                         <?php endforeach; ?>
+                        <li class="social ms-0 ms-md-3 mt-2 mt-md-0">
+                            <?php foreach ($socials as $social) : ?>
+                                <a href="<?= $social['link']; ?>" class="bi-<?= $social['icon']; ?>" title="<?= $social['title']; ?>" target="_blank"></a>
+                            <?php endforeach; ?>
+                        </li>
                     </ul>
                 </div>
             </div>

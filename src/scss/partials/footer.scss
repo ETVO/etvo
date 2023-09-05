@@ -6,6 +6,7 @@ footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         .brand {
             img {
                 width: 150px;
@@ -14,30 +15,44 @@ footer {
         .copy {
             color: white;
             font-weight: 200;
-            font-size: .9rem;
+            font-size: 0.9rem;
             letter-spacing: 1px;
             display: flex;
             flex-flow: column;
             text-align: center;
             span {
-                margin-bottom: .25rem;
+                margin-bottom: 0.25rem;
                 &:last-child {
                     margin-bottom: 0;
                 }
             }
             .stmt {
-                font-family: 'Lora', serif;
+                font-family: "Lora", serif;
                 a {
                     font-style: italic;
                     font-weight: 600;
                     color: white;
-    
+
                     &:hover {
-                        opacity: .5;
+                        opacity: 0.5;
                     }
                 }
             }
+
+            .social {
+                margin-bottom: 1rem;
+            }
         }
 
+        @media all and (max-width: 768px) {
+            margin: 0 -1rem;
+        }
+
+        @media all and (max-width: 576px) {
+            margin: 0;
+            flex-flow: column;
+            gap: 2rem;
+            align-items: center;
+        }
     }
 }

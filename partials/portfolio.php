@@ -62,7 +62,7 @@ $portfolio = $blocks['portfolio'];
                             <img class="thumbnail" src="<?php echo $thumbnail_src; ?>" alt="">
                             <div class="overlay">
                                 <div class="inner">
-                                    <h3 class="title fs-4">
+                                    <h3 class="title">
                                         <?php echo $title; ?>
                                     </h3>
 

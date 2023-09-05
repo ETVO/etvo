@@ -107,3 +107,29 @@ a.anchor {
         text-align: center;
     }
 }
+
+.action-block {
+    .caption {
+        margin-bottom: 0.5rem;
+
+        font-style: italic;
+        font-family: "Lora", sans-serif;
+        font-weight: 400;
+    }
+}
+
+.social {
+    a {
+        display: inline-block;
+        &:not(:last-child) {
+            margin-right: 0.5rem;
+        }
+        font-size: 1rem;
+        color: white;
+        transition: color 0.1s;
+
+        &:hover {
+            color: mix(white, #ed2647, 30%);
+        }
+    }
+}

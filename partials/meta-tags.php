@@ -7,7 +7,7 @@ $meta_default = array(
     'page_language' => 'en',
     'page_description' => 'Professional, high quality web development and design for projects that want to be remembered.',
     'page_keywords' => 'web design, web development, memorable experiences, efficient tools, website front-end and back-end, performance, user experience, digital marketing resources, blog, contact forms, prototype, user experience design, remarkable websites, authority, maintenance plans, branding, visual identity, strong brand concept, professional visual resources, fair pricing.',
-    'page_image' => ''
+    'page_image' => HOME_URL . '/assets/img/meta-image.png'
 );
 
 foreach ($meta_default as $key => $value) {
@@ -50,7 +50,7 @@ else :
 
     <!-- Keywords -->
     <meta name="keywords" content="<?= $page_keywords; ?>">
-    
+
     <!-- Canonical -->
     <meta property="canonical" content="<?= $page_url; ?>">
 
@@ -66,6 +66,8 @@ else :
     <meta name="twitter:title" content="<?= $page_title; ?>">
     <meta name="twitter:description" content="<?= $page_description; ?>">
     <meta name="twitter:image" content="<?= $page_image; ?>">
-    <script type="application/ld+json" class="yoast-schema-graph"><?= json_encode($schema); ?></script>
+    <script type="application/ld+json" class="yoast-schema-graph">
+        <?= json_encode($schema); ?>
+    </script>
 
 <?php endif;

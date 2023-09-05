@@ -30,7 +30,7 @@ $form_message = isset($_GET['form_message'])
                     <?php echo $contact['desc']; ?>
                 </p>
                 <div class="form">
-                    <form id="contact-form" action="/manage/util/send_mail.php" method="post" novalidate>
+                    <form id="contact-form" action="<?= CONTROL_URL . '/send_mail.php' ?>" method="post" novalidate>
                         <div id="form-message" class="<?php if ($form_status) echo $form_status ?>">
                             <div class="message">
                                 <?php echo $form_message; ?>

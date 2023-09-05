@@ -37,13 +37,20 @@ header {
                 font-weight: 300;
                 font-family: "Lora", serif;
             }
+
+            .social {
+                align-self: center;
+                @media all and (max-width: 768px) {
+                    align-self: unset;
+                    a {
+                        font-size: 1.25rem;
+                    }
+                }
+            }
         }
 
         .action {
             margin-left: 1rem;
-
-            .btn {
-            }
         }
     }
 

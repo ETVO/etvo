@@ -59,6 +59,7 @@
             }
 
             .thumbnail {
+                border-radius: 0.5rem;
                 height: 300px;
                 width: 100%;
                 object-fit: cover;
@@ -81,15 +82,17 @@
                 .inner {
                     margin: auto;
                     text-align: center;
+                    font-size: 1rem;    
 
                     .title {
                         font-family: "Lora", serif;
+                        font-size: calc(1.275em + 0.3vw);
                         color: inherit;
                         text-shadow: 1px 1px 3px rgba(#000, 0.5);
                     }
 
                     .year {
-                        font-size: 1.1rem;
+                        font-size: 1.1em;
                         letter-spacing: 1px;
                         font-weight: 300;
                         text-shadow: 1px 1px 3px rgba(#000, 0.5);
@@ -140,19 +143,19 @@
 
         .projects .project {
             .thumbnail {
-                height: 180px;
+                // object-fit: contain;
+                height: 250px;
+                object-position: top center;
             }
             .overlay {
                 position: relative;
                 opacity: 1;
-                margin: 0.5rem 0 0;
+                margin: 1rem 0 0;
+                height: auto;
                 .inner {
+                    font-size: .9rem;
                     .title {
-                        font-size: 0.9rem !important;
                         font-weight: normal;
-                    }
-                    .year {
-                        font-size: 0.8rem;
                     }
                 }
             }
